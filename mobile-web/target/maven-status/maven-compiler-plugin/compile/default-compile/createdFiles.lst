@@ -1,0 +1,4 @@
+org\mobile\converter\CategoryEditor.class
+org\mobile\converter\StringToCategoryConverter.class
+org\mobile\controller\HomeController.class
+org\mobile\controller\ProductController.class
