@@ -16,11 +16,8 @@
 			<td><form:errors path="name" cssClass="error" /></td>
 		</tr>
 		<tr>
-			<td>Category :</td>
-			<td><form:select path="category" >
-                <form:option value="0" label="--- Select ---" />
-                <form:options path="category" items="${categories}" itemValue="id" itemLabel="name"/>
-                </form:select>
+			<td>Category :
+                <form:select path="category" items="${categories}" itemValue="id" itemLabel="name"/>
             </td>
 			<td><form:errors path="category" cssClass="error" /></td>
 		</tr>

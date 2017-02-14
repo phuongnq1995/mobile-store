@@ -17,16 +17,8 @@
 	
 	<context:annotation-config />
 	
-	<mvc:annotation-driven conversion-service="conversionService"/>
+	<mvc:annotation-driven />
 	
-	<bean id="conversionService"
-	      class="org.springframework.context.support.ConversionServiceFactoryBean">
-	    <property name="converters">
-	        <list>
-	            <bean class="org.mobile.converter.StringToCategoryConverter" />
-	        </list>
-	    </property>
-	</bean>
 	
 	<mvc:resources mapping="/resource/**" location="/resource/" />
 	

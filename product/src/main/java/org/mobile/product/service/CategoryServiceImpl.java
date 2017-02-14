@@ -20,5 +20,5 @@ public class CategoryServiceImpl implements CategoryService{
 	public Category findOne(int id) {
 		return categoryRepository.findOne(id);
 	}
-	
+
 }

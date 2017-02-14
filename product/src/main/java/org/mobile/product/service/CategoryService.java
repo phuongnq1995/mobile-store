@@ -9,5 +9,5 @@ public interface CategoryService {
 	List<Category> findAll();
 	
 	Category findOne(int id);
-
+	
 }
