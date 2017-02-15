@@ -1,3 +1,4 @@
 org\mobile\controller\admin\ProductController.class
 org\mobile\converter\CategoryEditor.class
 org\mobile\controller\home\HomeController.class
+org\mobile\converter\PublisherEditor.class

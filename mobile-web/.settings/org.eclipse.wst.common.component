@@ -10,6 +10,9 @@
         <dependent-module archiveName="product-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/product/product">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="publisher-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/publisher/publisher">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="mobile-web"/>
         <property name="java-output-path" value="/mobile-web/target/classes"/>
     </wb-module>

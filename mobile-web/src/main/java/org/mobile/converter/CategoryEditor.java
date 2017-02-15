@@ -2,7 +2,7 @@ package org.mobile.converter;
 
 import java.beans.PropertyEditorSupport;
 
-import org.mobile.product.model.Category;
+import org.mobile.category.model.Category;
 
 public class CategoryEditor extends PropertyEditorSupport{
 	

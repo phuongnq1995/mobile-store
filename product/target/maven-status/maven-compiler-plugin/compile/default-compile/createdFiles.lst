@@ -1,6 +1,3 @@
-org\mobile\product\service\CategoryService.class
-org\mobile\product\service\CategoryServiceImpl.class
-org\mobile\product\service\ProductServiceImpl.class
 org\mobile\product\service\ProductService.class
 org\mobile\product\repository\ProductRepository.class
-org\mobile\product\repository\CategoryRepository.class
+org\mobile\product\service\ProductServiceImpl.class

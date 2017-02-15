@@ -1,2 +1,3 @@
 org\mobile\product\model\Product.class
-org\mobile\product\model\Category.class
+org\mobile\category\model\Category.class
+org\mobile\publisher\model\Publisher.class

@@ -1,9 +1,8 @@
-package org.mobile.product.repository;
+package org.mobile.categoy.repository;
 
-
-import org.mobile.product.model.Category;
+import org.mobile.category.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
-	
-	Category findByName(String name);
+
 }
