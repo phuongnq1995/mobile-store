@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -18,8 +17,8 @@
 			<td><form:errors path="name" cssClass="error" /></td>
 		</tr>
 		<tr>
-			<td>Category<form:select path="category"
-					items="${categories}" itemValue="id" itemLabel="name" />
+			<td>Category<form:select path="category" items="${categories}"
+					itemValue="id" itemLabel="name" />
 			</td>
 			<td><form:errors path="category" cssClass="error" /></td>
 		</tr>
@@ -33,6 +32,13 @@
 			<td>Description :</td>
 			<td><form:input path="description" /></td>
 			<td><form:errors path="description" cssClass="error" /></td>
+		</tr>
+		<tr>
+			<td>Price :</td>
+			<c:forEach varStatus="vs" items="${product.getPrices()}">
+				<td><form:input path="prices[${vs.index}].money" /></td>
+				<td><form:errors path="prices[${vs.index}].money" cssClass="error" /></td>
+			</c:forEach>
 		</tr>
 		<tr>
 			<td><input type="submit" value="Save" /></td>

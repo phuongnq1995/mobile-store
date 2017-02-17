@@ -3,7 +3,6 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <h1>Products List</h1>
 <p>${message}</p>
@@ -14,6 +13,7 @@
 		<th>Description</th>
 		<th>Category</th>
 		<th>Publisher</th>
+		<th>Price</th>
 		<th>Action</th>
 		<c:forEach var="product" items="${products}">
 			<tr>
@@ -22,6 +22,7 @@
 				<td>${product.description}</td>
 				<td>${product.category.name}</td>
 				<td>${product.publisher.name}</td>
+				<td>${product.getCurrentPrice().money}</td>
 				<td><a href="product/${product.id}">Edit</a></td>
 				<td><a href="product/delete/${product.id}">Delete</a></td>
 			</tr>

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.mobile.converter.CategoryEditor;
+import org.mobile.converter.PriceEditor;
 import org.mobile.converter.PublisherEditor;
+import org.mobile.price.model.Price;
 import org.mobile.category.model.Category;
 import org.mobile.product.model.Product;
 import org.mobile.category.service.CategoryService;
@@ -33,7 +35,7 @@ public class ProductController {
 
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@Autowired
 	private PublisherService publisherService;
 
@@ -41,6 +43,7 @@ public class ProductController {
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Category.class, new CategoryEditor());
 		binder.registerCustomEditor(Publisher.class, new PublisherEditor());
+		binder.registerCustomEditor(Price.class, new PriceEditor());
 	}
 
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
@@ -55,18 +58,24 @@ public class ProductController {
 		categories.addAll(categoryService.findAll());
 		return categories;
 	}
-	
+
 	@ModelAttribute("publisherList")
 	public List<Publisher> populatePublisherList() {
 		ArrayList<Publisher> publisherList = new ArrayList<Publisher>();
 		publisherList.addAll(publisherService.findAll());
 		return publisherList;
 	}
-	
+
 	@RequestMapping(value = "/product/new", method = RequestMethod.GET)
 	String newProduct(Model model) {
-		model.addAttribute("product", new Product());
-		return "saveproduct";
+		Product product = new Product();
+		List<Price> prices = new ArrayList<Price>();
+		Price price = new Price();
+		price.setProduct(product);
+		prices.add(price);
+		product.setPrices(prices);
+		model.addAttribute("product", product);
+		return "newproduct";
 	}
 
 	@RequestMapping(value = "/product/save", method = RequestMethod.POST)
