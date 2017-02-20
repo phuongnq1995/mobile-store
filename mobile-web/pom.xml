@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -26,6 +25,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.mobile-store</groupId>
+			<artifactId>image</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mobile-store</groupId>
 			<artifactId>category</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -34,7 +38,7 @@
 			<artifactId>publisher</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>org.mobile-store</groupId>
 			<artifactId>price</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
@@ -69,6 +73,17 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
 		</dependency>
 	</dependencies>
 

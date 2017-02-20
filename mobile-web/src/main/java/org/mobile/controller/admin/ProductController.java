@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.mobile.converter.CategoryEditor;
 import org.mobile.converter.PriceEditor;
 import org.mobile.converter.PublisherEditor;
+import org.mobile.image.model.Image;
 import org.mobile.price.model.Price;
 import org.mobile.category.model.Category;
 import org.mobile.product.model.Product;
@@ -23,7 +24,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -66,20 +69,33 @@ public class ProductController {
 		return publisherList;
 	}
 
-	@RequestMapping(value = "/product/new", method = RequestMethod.GET)
-	String newProduct(Model model) {
+	Product newProduct() {
 		Product product = new Product();
 		List<Price> prices = new ArrayList<Price>();
 		Price price = new Price();
 		price.setProduct(product);
 		prices.add(price);
 		product.setPrices(prices);
-		model.addAttribute("product", product);
+		return product;
+	}
+
+	@RequestMapping(value = "/product/new", method = RequestMethod.GET)
+	String newProduct(Model model) {
+		model.addAttribute("product", newProduct());
 		return "newproduct";
 	}
 
 	@RequestMapping(value = "/product/save", method = RequestMethod.POST)
-	String createProduct(RedirectAttributes redirectAttributes, @Valid Product product, BindingResult bindingResult) {
+	String createProduct(RedirectAttributes redirectAttributes, @Valid Product product, BindingResult bindingResult,
+			@RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
+		List<Image> images = new ArrayList<Image>();
+		for (CommonsMultipartFile aFile : fileUpload){
+			Image image = new Image();
+			image.setData(aFile.getBytes());
+			image.setProduct(product);
+			images.add(image);
+		}
+		product.setImages(images);
 		if (bindingResult.hasErrors())
 			return "saveproduct";
 		else

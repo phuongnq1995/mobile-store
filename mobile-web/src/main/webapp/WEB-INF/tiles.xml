@@ -23,9 +23,9 @@
        <put-attribute name="body" value="/WEB-INF/views/product/product.jsp" />
    </definition>
    
-   <definition name="saveproduct" extends="base-definition">
+   <definition name="newproduct" extends="base-definition">
        <put-attribute name="title" value="welcome" />  
-       <put-attribute name="body" value="/WEB-INF/views/product/saveproduct.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/views/product/newproduct.jsp" />  
    </definition>    
    
 </tiles-definitions>

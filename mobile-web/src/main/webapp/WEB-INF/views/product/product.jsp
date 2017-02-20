@@ -17,6 +17,9 @@
 		<th>Action</th>
 		<c:forEach var="product" items="${products}">
 			<tr>
+				<c:forEach var="image" items="${product.getImages()}">
+					<img src="${image.data}" />
+				</c:forEach>
 				<td>${product.id}</td>
 				<td>${product.name}</td>
 				<td>${product.description}</td>

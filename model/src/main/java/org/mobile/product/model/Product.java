@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.mobile.category.model.Category;
+import org.mobile.image.model.Image;
 import org.mobile.price.model.Price;
 import org.mobile.publisher.model.Publisher;
 
@@ -48,6 +49,9 @@ public class Product implements Serializable{
 	
 	@OneToMany(mappedBy="product", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Price> prices;
+	
+	@OneToMany(mappedBy="product", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	private List<Image> images;
 	
 	public int getId() {
 		return id;
@@ -92,4 +96,11 @@ public class Product implements Serializable{
 		}
 		return null;
 	}
+	public List<Image> getImages() {
+		return images;
+	}
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+	
 }
