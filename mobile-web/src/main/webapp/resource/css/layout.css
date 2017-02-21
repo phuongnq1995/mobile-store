@@ -1,0 +1,48 @@
+header, nav, footer, article {
+	
+}
+
+article {
+	float: right;
+	width: 79%;
+}
+
+body {
+	min-height: 100%;
+}
+
+.main-footer {
+	background: #fff;
+	padding: 15px;
+	color: #444;
+	border-top: 1px solid #d2d6de;
+	z-index: 820;
+}
+
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+.carousel-inner img {
+	width: 100%; /* Set width to 100% */
+	margin: auto;
+	min-height: 200px;
+}
+
+/* Hide the carousel text when the screen is less than 600 pixels wide */
+@media ( max-width : 600px) {
+	.carousel-caption {
+		display: none;
+	}
+}
+
+.body-content {
+	min-height: 73%;
+}
+.header-content{
+	min-height: 20%;
+}
+.footer-content{
+	min-height: 7%;
+}

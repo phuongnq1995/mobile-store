@@ -6,22 +6,25 @@
  
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title><tiles:getAsString name="title" /></title>
-    <link href="<c:url value='/static/css/bootstrap.css' />"  rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+	<title><tiles:getAsString name="title" /></title>
+	<link href="<c:url value="/resource/css/bootstrap.css" />" rel="stylesheet">
+	<link href="<c:url value="/resource/font-awesome-4.5.0/css/font-awesome.css" />" rel="stylesheet">	
+	<link href="<c:url value="/resource/css/layout.css" />" rel="stylesheet">	
 </head>
   
 <body>
-        <header id="header">
+        <header class="header-content">
             <tiles:insertAttribute name="header" />
         </header>
-               
-        <section id="site-content">
+
+        <section class="body-content">
             <tiles:insertAttribute name="body" />
         </section>
          
-        <footer id="footer">
+        <footer class="footer-content">
             <tiles:insertAttribute name="footer" />
         </footer>
+    <script src="<c:url value="/resource/js/jquery-1.9.1.min.js"/>"></script>
+    <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 </body>
 </html>

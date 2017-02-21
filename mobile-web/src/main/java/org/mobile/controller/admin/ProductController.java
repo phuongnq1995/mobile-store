@@ -2,11 +2,14 @@ package org.mobile.controller.admin;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.mobile.converter.CategoryEditor;
 import org.mobile.converter.PriceEditor;
 import org.mobile.converter.PublisherEditor;
 import org.mobile.image.model.Image;
+import org.mobile.image.service.ImageService;
 import org.mobile.price.model.Price;
 import org.mobile.category.model.Category;
 import org.mobile.product.model.Product;
@@ -25,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -42,6 +46,9 @@ public class ProductController {
 	@Autowired
 	private PublisherService publisherService;
 
+	@Autowired
+	private ImageService imageService;
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Category.class, new CategoryEditor());
@@ -50,7 +57,8 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	String showPage(Model model) {
+	String showPage(Model model, HttpServletResponse response, HttpServletRequest request) {
+
 		model.addAttribute("products", productService.findAll());
 		return "product";
 	}
@@ -85,11 +93,11 @@ public class ProductController {
 		return "newproduct";
 	}
 
-	@RequestMapping(value = "/product/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/product/new", method = RequestMethod.POST)
 	String createProduct(RedirectAttributes redirectAttributes, @Valid Product product, BindingResult bindingResult,
 			@RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
 		List<Image> images = new ArrayList<Image>();
-		for (CommonsMultipartFile aFile : fileUpload){
+		for (CommonsMultipartFile aFile : fileUpload) {
 			Image image = new Image();
 			image.setData(aFile.getBytes());
 			image.setProduct(product);
@@ -97,22 +105,40 @@ public class ProductController {
 		}
 		product.setImages(images);
 		if (bindingResult.hasErrors())
-			return "saveproduct";
+			return "newproduct";
 		else
 			redirectAttributes.addFlashAttribute("message", productService.save(product));
 		return "redirect:/product";
 	}
 
-	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/product/info/{id}", method = RequestMethod.GET)
 	String editProduct(Model model, @PathVariable int id) {
 		Product product = productService.findOne(id);
 		model.addAttribute("product", product);
-		return "saveproduct";
+		return "editproduct";
+	}
+
+	@RequestMapping(value = "/product/info/update", method = RequestMethod.POST)
+	String updateProduct(RedirectAttributes redirectAttributes, @ModelAttribute Product product,
+			BindingResult bindingResult) {
+		if (bindingResult.hasErrors())
+			return "editproduct";
+		else
+			redirectAttributes.addFlashAttribute("message", productService.save(product));
+		return "redirect:/product";
 	}
 
 	@RequestMapping(value = "/product/delete/{id}", method = RequestMethod.GET)
 	String deleteUser(@PathVariable int id, RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("message", productService.delete(id));
 		return "redirect:/product";
+	}
+
+	@RequestMapping(value = "/imageShow/{id}")
+	@ResponseBody
+	public byte[] showImage(@PathVariable int id) {
+		Image image = imageService.findOne(id);
+		System.out.println(image.getData());
+		return image.getData();
 	}
 }

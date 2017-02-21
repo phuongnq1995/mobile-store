@@ -1,5 +1,7 @@
 package org.mobile.image.service;
 
-public interface ImageService {
+import org.mobile.image.model.Image;
 
+public interface ImageService {
+	Image findOne(int id);
 }

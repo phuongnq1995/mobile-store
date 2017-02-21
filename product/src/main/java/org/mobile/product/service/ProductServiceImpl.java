@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	public String save(Product product) {
-		ArrayList<Image> images = (ArrayList<Image>) product.getImages();
+		List<Image> images = (List<Image>) product.getImages();
 		for (int i = images.size()-1; i >= 0 ; i--){
 			if(images.get(i).getData().length <= 0)
 				images.remove(i);
