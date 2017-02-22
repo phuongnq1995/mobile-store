@@ -8,10 +8,7 @@
 <form:form method="POST" modelAttribute="product" action="new"
 	enctype="multipart/form-data">
 	<table>
-		<tr>
-			<td></td>
-			<td><form:hidden path="id" /></td>
-		</tr>
+		<form:hidden path="id" />
 		<tr>
 			<td>Name :</td>
 			<td><form:input path="name" /></td>
@@ -38,8 +35,7 @@
 			<td>Price :</td>
 			<c:forEach varStatus="vs" items="${product.getPrices()}">
 				<td><form:input path="prices[${vs.index}].money" /></td>
-				<td><form:errors path="prices[${vs.index}].money"
-						cssClass="error" /></td>
+				<td><form:errors path="prices[${vs.index}].money" cssClass="error" /></td>
 			</c:forEach>
 		</tr>
 		<tr>

@@ -1,9 +1,6 @@
 package org.mobile.product.service;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.mobile.image.model.Image;
 import org.mobile.product.model.Product;
 import org.mobile.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +27,8 @@ public class ProductServiceImpl implements ProductService {
 			return "Not found !";
 	}
 
-	public Product getProduct(int id) {
-		return productRepository.findOne(id);
-	}
-
 	public String save(Product product) {
-		List<Image> images = (List<Image>) product.getImages();
-		for (int i = images.size()-1; i >= 0 ; i--){
-			if(images.get(i).getData().length <= 0)
-				images.remove(i);
-		}
-		product.setImages(images);
-		
+		product.getPrices().get(product.getPrices().size()-1).setCurrent(true);
 		productRepository.save(product);
 		return "Save success !";
 	}

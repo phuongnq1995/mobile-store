@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<h1>Products List</h1>
+<h3>Products List</h3>
 <p>${message}</p>
 <div class="container">
 	<table class="table table-striped">
@@ -22,7 +22,6 @@
 		<tbody>
 			<c:forEach var="product" items="${products}">
 				<tr>
-
 					<td>${product.id}</td>
 					<td>${product.name}</td>
 					<td>${product.description}</td>
@@ -45,7 +44,8 @@
 								<li><a href="product/price/${product.id}">Edit Prices</a></li>
 							</ul>
 						</div></td>
-					<td><a href="product/delete/${product.id}" class="btn btn-danger" type="button">Delete</a></td>
+					<td><a href="product/delete/${product.id}"
+						class="btn btn-danger" type="button">Delete</a></td>
 				</tr>
 			</c:forEach>
 		<tbody>

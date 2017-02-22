@@ -10,8 +10,6 @@ public interface ProductService {
 	
 	String delete(int id);
 	
-	Product getProduct(int id);
-	
 	String save(Product product);
 	
 	Product findOne(int id);

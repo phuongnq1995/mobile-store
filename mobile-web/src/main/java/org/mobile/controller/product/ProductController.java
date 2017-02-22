@@ -1,9 +1,7 @@
-package org.mobile.controller.admin;
+package org.mobile.controller.product;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.mobile.converter.CategoryEditor;
 import org.mobile.converter.PriceEditor;
@@ -57,8 +55,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	String showPage(Model model, HttpServletResponse response, HttpServletRequest request) {
-
+	String showPage(Model model) {
 		model.addAttribute("products", productService.findAll());
 		return "product";
 	}
@@ -98,10 +95,12 @@ public class ProductController {
 			@RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
 		List<Image> images = new ArrayList<Image>();
 		for (CommonsMultipartFile aFile : fileUpload) {
-			Image image = new Image();
-			image.setData(aFile.getBytes());
-			image.setProduct(product);
-			images.add(image);
+			if (aFile.getBytes().length > 0) {
+				Image image = new Image();
+				image.setData(aFile.getBytes());
+				image.setProduct(product);
+				images.add(image);
+			}
 		}
 		product.setImages(images);
 		if (bindingResult.hasErrors())
@@ -115,14 +114,37 @@ public class ProductController {
 	String editProduct(Model model, @PathVariable int id) {
 		Product product = productService.findOne(id);
 		model.addAttribute("product", product);
-		return "editproduct";
+		return "editinfoproduct";
 	}
 
 	@RequestMapping(value = "/product/info/update", method = RequestMethod.POST)
 	String updateProduct(RedirectAttributes redirectAttributes, @ModelAttribute Product product,
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
-			return "editproduct";
+			return "editinfoproduct";
+		else
+			redirectAttributes.addFlashAttribute("message", productService.save(product));
+		return "redirect:/product";
+	}
+
+	@RequestMapping(value = "/product/price/{id}", method = RequestMethod.GET)
+	String editPricesProduct(Model model, @PathVariable int id) {
+		Product product = productService.findOne(id);
+		Price price = new Price();
+		price.setProduct(product);
+		product.getPrices().add(price);
+		model.addAttribute("product", product);
+		return "editpriceproduct";
+	}
+
+	@RequestMapping(value = "/product/price/update", method = RequestMethod.POST)
+	String updatePricesProduct(RedirectAttributes redirectAttributes, @ModelAttribute Product product,
+			BindingResult bindingResult) {
+		for (Price price : product.getPrices()) {
+			price.setCurrent(false);
+		}
+		if (bindingResult.hasErrors())
+			return "editinfoproduct";
 		else
 			redirectAttributes.addFlashAttribute("message", productService.save(product));
 		return "redirect:/product";
@@ -133,12 +155,13 @@ public class ProductController {
 		redirectAttributes.addFlashAttribute("message", productService.delete(id));
 		return "redirect:/product";
 	}
-
+	
 	@RequestMapping(value = "/imageShow/{id}")
 	@ResponseBody
 	public byte[] showImage(@PathVariable int id) {
 		Image image = imageService.findOne(id);
-		System.out.println(image.getData());
-		return image.getData();
+		if(image != null)
+			return image.getData();
+		return null;
 	}
 }

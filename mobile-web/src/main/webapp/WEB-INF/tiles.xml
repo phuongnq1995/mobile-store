@@ -1,35 +1,44 @@
 <!DOCTYPE tiles-definitions PUBLIC
   "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
   "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
-<tiles-definitions>  
-  
-   <!-- Base Definition -->
-   <definition name="base-definition"
-       template="/WEB-INF/views/template/defaultLayout.jsp">  
-       <put-attribute name="title" value="" />  
-       <put-attribute name="header" value="/WEB-INF/views/template/defaultHeader.jsp" />
-       <put-attribute name="body" value="" />  
-       <put-attribute name="footer" value="/WEB-INF/views/template/defaultFooter.jsp" />  
-   </definition>  
+<tiles-definitions>
 
-   <!-- Home Page -->
-   <definition name="welcome" extends="base-definition">  
-       <put-attribute name="title" value="welcome" />  
-       <put-attribute name="body" value="/WEB-INF/views/welcome.jsp" />  
-   </definition>
-  
-   <definition name="product" extends="base-definition">
-       <put-attribute name="title" value="welcome" />
-       <put-attribute name="body" value="/WEB-INF/views/product/product.jsp" />
-   </definition>
-   
-   <definition name="newproduct" extends="base-definition">
-       <put-attribute name="title" value="welcome" />  
-       <put-attribute name="body" value="/WEB-INF/views/product/newproduct.jsp" />  
-   </definition>   
-    
-   <definition name="editproduct" extends="base-definition">
-       <put-attribute name="title" value="welcome" />  
-       <put-attribute name="body" value="/WEB-INF/views/product/editproduct.jsp" />  
-   </definition>       
+	<!-- Base Definition -->
+	<definition name="base-definition" template="/WEB-INF/views/template/defaultLayout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/template/defaultHeader.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/template/defaultFooter.jsp" />
+	</definition>
+
+	<!-- Home Page -->
+	<definition name="welcome" extends="base-definition">
+		<put-attribute name="title" value="welcome" />
+		<put-attribute name="body" value="/WEB-INF/views/welcome.jsp" />
+	</definition>
+
+	<definition name="product" extends="base-definition">
+		<put-attribute name="title" value="welcome" />
+		<put-attribute name="body" value="/WEB-INF/views/product/product.jsp" />
+	</definition>
+
+	<definition name="newproduct" extends="base-definition">
+		<put-attribute name="title" value="welcome" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/newproduct.jsp" />
+	</definition>
+
+	<definition name="editinfoproduct" extends="base-definition">
+		<put-attribute name="title" value="welcome" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/editinfoproduct.jsp" />
+	</definition>
+
+	<definition name="editpriceproduct" extends="base-definition">
+		<put-attribute name="title" value="welcome" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/editpriceproduct.jsp" />
+	</definition>
 </tiles-definitions>

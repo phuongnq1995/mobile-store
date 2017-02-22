@@ -8,10 +8,16 @@
 <h1>Edit Product</h1>
 <form:form method="POST" modelAttribute="product" action="update"
 	enctype="multipart/form-data">
-	<table>
+	<table class="table table-striped">
 		<tr>
 			<td></td>
 			<td><form:hidden path="id" /></td>
+		</tr>
+		<tr>
+			<td><c:forEach var="image" items="${product.getImages()}">
+					<img src="${pageContext.request.contextPath}/imageShow/${image.id}"
+						class="img-thumbnail" width="50px" height="50px" />
+				</c:forEach></td>
 		</tr>
 		<tr>
 			<td>Name :</td>
