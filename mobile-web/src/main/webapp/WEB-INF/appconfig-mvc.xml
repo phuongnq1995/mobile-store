@@ -11,14 +11,11 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 ">
 
-	<tx:annotation-driven />
-
 	<context:component-scan base-package="org.mobile.*" />
 	
 	<context:annotation-config />
 	
 	<mvc:annotation-driven />
-	
 	
 	<mvc:resources mapping="/resource/**" location="/resource/" />
 	

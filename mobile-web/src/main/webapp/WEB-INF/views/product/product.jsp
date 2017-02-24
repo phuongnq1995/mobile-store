@@ -3,7 +3,6 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <h3>Products List</h3>
 <p>${message}</p>
 <div class="container">
@@ -29,8 +28,8 @@
 					<td>${product.publisher.name}</td>
 					<td>${product.getCurrentPrice().money}</td>
 					<td><c:forEach var="image" items="${product.getImages()}">
-							<img src="${pageContext.request.contextPath}/imageShow/${image.id}"
-								class="img-thumbnail" width="50px" height="50px" />
+							<img src="${pageContext.request.contextPath}/imageShow/${image.getId()}"
+								 width="50px" height="50px" />
 						</c:forEach></td>
 					<td><div class="dropdown">
 							<button class="btn btn-warning dropdown-toggle" type="button"
@@ -38,7 +37,7 @@
 								Edit <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu">
-								<li><a href="product/info/${product.id}">Edit
+								<li><a href="product/${product.id}">Edit
 										Information</a></li>
 								<li><a href="product/image/${product.id}">Edit Images</a></li>
 								<li><a href="product/price/${product.id}">Edit Prices</a></li>

@@ -8,7 +8,6 @@
 <form:form method="POST" modelAttribute="product" action="new"
 	enctype="multipart/form-data">
 	<table>
-		<form:hidden path="id" />
 		<tr>
 			<td>Name :</td>
 			<td><form:input path="name" /></td>

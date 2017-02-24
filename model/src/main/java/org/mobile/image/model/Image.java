@@ -1,13 +1,13 @@
 package org.mobile.image.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import org.mobile.product.model.Product;
 
 @Entity
-@Table(name="image")
+@Table(name="image",indexes = { @Index(columnList = "id",    unique = true) })
 public class Image implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -23,8 +23,8 @@ public class Image implements Serializable{
 	@Id@GeneratedValue
 	private int id;
 	
-	@Basic(fetch=FetchType.LAZY)
 	@Lob
+	@Column(nullable=false, updatable=true)
 	private byte[] data;
 	
 	@ManyToOne
@@ -55,5 +55,4 @@ public class Image implements Serializable{
 		this.product = product;
 	}
 
-	public Image(){}
 }

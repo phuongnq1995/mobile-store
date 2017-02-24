@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.mobile.converter.CategoryEditor;
-import org.mobile.converter.PriceEditor;
 import org.mobile.converter.PublisherEditor;
 import org.mobile.image.model.Image;
-import org.mobile.image.service.ImageService;
 import org.mobile.price.model.Price;
 import org.mobile.category.model.Category;
 import org.mobile.product.model.Product;
@@ -26,7 +24,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -44,20 +41,10 @@ public class ProductController {
 	@Autowired
 	private PublisherService publisherService;
 
-	@Autowired
-	private ImageService imageService;
-
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Category.class, new CategoryEditor());
 		binder.registerCustomEditor(Publisher.class, new PublisherEditor());
-		binder.registerCustomEditor(Price.class, new PriceEditor());
-	}
-
-	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	String showPage(Model model) {
-		model.addAttribute("products", productService.findAll());
-		return "product";
 	}
 
 	@ModelAttribute("categories")
@@ -89,7 +76,7 @@ public class ProductController {
 		model.addAttribute("product", newProduct());
 		return "newproduct";
 	}
-
+	
 	@RequestMapping(value = "/product/new", method = RequestMethod.POST)
 	String createProduct(RedirectAttributes redirectAttributes, @Valid Product product, BindingResult bindingResult,
 			@RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
@@ -110,39 +97,19 @@ public class ProductController {
 		return "redirect:/product";
 	}
 
-	@RequestMapping(value = "/product/info/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
 	String editProduct(Model model, @PathVariable int id) {
-		Product product = productService.findOne(id);
-		model.addAttribute("product", product);
-		return "editinfoproduct";
-	}
-
-	@RequestMapping(value = "/product/info/update", method = RequestMethod.POST)
-	String updateProduct(RedirectAttributes redirectAttributes, @ModelAttribute Product product,
-			BindingResult bindingResult) {
-		if (bindingResult.hasErrors())
-			return "editinfoproduct";
-		else
-			redirectAttributes.addFlashAttribute("message", productService.save(product));
-		return "redirect:/product";
-	}
-
-	@RequestMapping(value = "/product/price/{id}", method = RequestMethod.GET)
-	String editPricesProduct(Model model, @PathVariable int id) {
 		Product product = productService.findOne(id);
 		Price price = new Price();
 		price.setProduct(product);
 		product.getPrices().add(price);
 		model.addAttribute("product", product);
-		return "editpriceproduct";
+		return "editinfoproduct";
 	}
 
-	@RequestMapping(value = "/product/price/update", method = RequestMethod.POST)
-	String updatePricesProduct(RedirectAttributes redirectAttributes, @ModelAttribute Product product,
+	@RequestMapping(value = "/product/update", method = RequestMethod.POST)
+	String updateProduct(RedirectAttributes redirectAttributes, @ModelAttribute Product product,
 			BindingResult bindingResult) {
-		for (Price price : product.getPrices()) {
-			price.setCurrent(false);
-		}
 		if (bindingResult.hasErrors())
 			return "editinfoproduct";
 		else
@@ -156,12 +123,4 @@ public class ProductController {
 		return "redirect:/product";
 	}
 	
-	@RequestMapping(value = "/imageShow/{id}")
-	@ResponseBody
-	public byte[] showImage(@PathVariable int id) {
-		Image image = imageService.findOne(id);
-		if(image != null)
-			return image.getData();
-		return null;
-	}
 }

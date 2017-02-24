@@ -16,5 +16,5 @@
 	<jpa:repositories base-package="org.mobile.image.repository" />
 
 	<mvc:annotation-driven />
-
+	
 </beans>
