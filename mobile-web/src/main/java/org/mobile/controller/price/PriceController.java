@@ -1,13 +1,12 @@
-/*package org.mobile.controller.price;
+package org.mobile.controller.price;
 
-import javax.transaction.Transactional;
-
+import java.util.List;
 import org.mobile.price.model.Price;
 import org.mobile.price.service.PriceService;
-import org.mobile.product.model.Product;
 import org.mobile.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @SessionAttributes("price")
+@Transactional
 public class PriceController {
 	
 	@Autowired
@@ -29,27 +29,28 @@ public class PriceController {
 	
 	@RequestMapping(value = "/product/price/{product_id}", method = RequestMethod.GET)
 	String editPricesProduct(Model model, @PathVariable int product_id) {
-		Product product = productService.findOne(product_id);
-		model.addAttribute("listPrices", priceService.findByProduct(product));
+		model.addAttribute("listPrices", productService.findOne(product_id).getPrices());
 		Price price = new Price();
-		price.setProduct(product);
+		price.setProduct_id(product_id);
 		model.addAttribute("price", price);
 		return "editpriceproduct";
 	}
 
-	@Transactional
 	@RequestMapping(value = "/product/price/update", method = RequestMethod.POST)
 	String updatePricesProduct(RedirectAttributes redirectAttributes, @ModelAttribute Price price,
 			BindingResult bindingResult) {
-		for(Price pr: price.getProduct().getPrices()){
-			pr.setCurrent(false);
-		}
-		price.getProduct().getPrices().add(price);
 		if (bindingResult.hasErrors())
 			return "editinfoproduct";
 		else
-			redirectAttributes.addFlashAttribute("message", priceService.saveAllList(price.getProduct().getPrices()));
+		{
+			List<Price> prices = productService.findOne(price.getProduct_id()).getPrices();
+			for(Price pr: prices){
+				pr.setCurrent(false);
+			}
+			price.setCurrent(true);
+			prices.add(price);
+			redirectAttributes.addFlashAttribute("message", priceService.saveAllList(prices));
+		}
 		return "redirect:/product";
 	}
 }
-*/

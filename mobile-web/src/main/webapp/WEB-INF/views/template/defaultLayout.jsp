@@ -7,9 +7,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title><tiles:getAsString name="title" /></title>
-	<link href="<c:url value="/resource/css/bootstrap.css" />" rel="stylesheet">
-	<link href="<c:url value="/resource/font-awesome-4.5.0/css/font-awesome.css" />" rel="stylesheet">	
-	<link href="<c:url value="/resource/css/layout.css" />" rel="stylesheet">	
+	<link href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/font-awesome-4.5.0/css/font-awesome.css" />" rel="stylesheet">	
+	<link href="<c:url value="/resources/css/layout.css" />" rel="stylesheet">	
 </head>
   
 <body>
@@ -24,7 +24,7 @@
         <footer class="footer-content">
             <tiles:insertAttribute name="footer" />
         </footer>
-    <script src="<c:url value="/resource/js/jquery-1.9.1.min.js"/>"></script>
-    <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/jquery-1.9.1.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 </body>
 </html>

@@ -2,14 +2,14 @@ package org.mobile.price.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.mobile.product.model.Product;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="price")
@@ -17,18 +17,20 @@ public class Price implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id@GeneratedValue
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	@Column
+	@NotNull
 	private Long money;
 	
-	@Column
+	@Column(columnDefinition="BIT", length=1)
+	@Basic
 	private boolean current = true;
 	
-	@ManyToOne
-	@JoinColumn(name="product_id", nullable = false)
-	private Product product;
+	@Column
+	private int product_id;
 	
 	public int getId() {
 		return id;
@@ -42,17 +44,18 @@ public class Price implements Serializable{
 	public void setMoney(Long money) {
 		this.money = money;
 	}
-	public Product getProduct() {
-		return product;
-	}
-	public void setProduct(Product product) {
-		this.product = product;
-	}
 	public Boolean getCurrent() {
 		return current;
 	}
 	public void setCurrent(Boolean current) {
 		this.current = current;
+	}
+	
+	public int getProduct_id() {
+		return product_id;
+	}
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
 	}
 	public Price(){}
 	

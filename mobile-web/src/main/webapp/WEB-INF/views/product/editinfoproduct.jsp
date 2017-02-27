@@ -34,23 +34,6 @@
 			<td><form:errors path="description" cssClass="error" /></td>
 		</tr>
 		<tr>
-			<c:forEach varStatus="vs" items="${product.getPrices()}" var="prices">
-				<c:if
-					test="${prices.getMoney() != null && prices.getCurrent() == false}">
-					<td>Older price: ${prices.getMoney()}</td>
-				</c:if>
-				<c:if
-					test="${prices.getMoney() != null && prices.getCurrent() == true}">
-					<td>Current price: ${prices.getMoney()}</td>
-				</c:if>
-				<c:if test="${prices.getMoney() == null}">
-					<td>New price: <form:input path="prices[${vs.index}].money" /></td>
-					<td><form:errors path="prices[${vs.index}].money"
-							cssClass="error" /></td>
-				</c:if>
-			</c:forEach>
-		</tr>
-		<tr>
 			<td><input type="submit" value="Save" /></td>
 		</tr>
 	</table>

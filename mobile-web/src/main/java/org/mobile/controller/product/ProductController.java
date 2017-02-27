@@ -65,7 +65,7 @@ public class ProductController {
 		Product product = new Product();
 		List<Price> prices = new ArrayList<Price>();
 		Price price = new Price();
-		price.setProduct(product);
+		price.setProduct_id(product.getId());
 		prices.add(price);
 		product.setPrices(prices);
 		return product;
@@ -85,7 +85,7 @@ public class ProductController {
 			if (aFile.getBytes().length > 0) {
 				Image image = new Image();
 				image.setData(aFile.getBytes());
-				image.setProduct(product);
+				image.setProduct_id(product.getId());
 				images.add(image);
 			}
 		}
@@ -101,7 +101,7 @@ public class ProductController {
 	String editProduct(Model model, @PathVariable int id) {
 		Product product = productService.findOne(id);
 		Price price = new Price();
-		price.setProduct(product);
+		price.setProduct_id(product.getId());
 		product.getPrices().add(price);
 		model.addAttribute("product", product);
 		return "editinfoproduct";

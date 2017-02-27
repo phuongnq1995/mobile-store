@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.mobile.category.model.Category;
 import org.mobile.image.model.Image;
 import org.mobile.price.model.Price;
@@ -47,10 +50,14 @@ public class Product implements Serializable{
 	@JoinColumn(name="publisher_id", nullable = false)
 	private Publisher publisher;
 	
-	@OneToMany(mappedBy="product", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinColumn(name="product_id")
 	private List<Price> prices;
 	
-	@OneToMany(mappedBy="product", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinColumn(name="product_id")
 	private List<Image> images;
 	
 	public int getId() {

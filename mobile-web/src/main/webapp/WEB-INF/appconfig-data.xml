@@ -44,6 +44,7 @@
 				<value>org.mobile.publisher.model</value>
 				<value>org.mobile.price.model</value>
 				<value>org.mobile.image.model</value>
+				<value>org.mobile.user.model</value>
 			</list>
 		</property>
 	</bean>
