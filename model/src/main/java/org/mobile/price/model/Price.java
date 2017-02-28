@@ -29,8 +29,8 @@ public class Price implements Serializable{
 	@Basic
 	private boolean current = true;
 	
-	@Column
-	private int product_id;
+	@Column(name="product_id", nullable=true)
+	private int productId;
 	
 	public int getId() {
 		return id;
@@ -50,12 +50,11 @@ public class Price implements Serializable{
 	public void setCurrent(Boolean current) {
 		this.current = current;
 	}
-	
-	public int getProduct_id() {
-		return product_id;
+	public int getProductId() {
+		return productId;
 	}
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 	public Price(){}
 	

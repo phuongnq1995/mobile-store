@@ -19,4 +19,10 @@ public class PriceServiceImpl implements PriceService{
 		return "Save success !";
 	}
 
+	@Transactional
+	public String deleteByProductId(int productId) {
+		priceRepository.deleteByProductId(productId);
+		return "Delete success !";
+	}
+
 }

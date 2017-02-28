@@ -31,7 +31,7 @@ public class PriceController {
 	String editPricesProduct(Model model, @PathVariable int product_id) {
 		model.addAttribute("listPrices", productService.findOne(product_id).getPrices());
 		Price price = new Price();
-		price.setProduct_id(product_id);
+		price.setProductId(product_id);
 		model.addAttribute("price", price);
 		return "editpriceproduct";
 	}
@@ -43,7 +43,7 @@ public class PriceController {
 			return "editinfoproduct";
 		else
 		{
-			List<Price> prices = productService.findOne(price.getProduct_id()).getPrices();
+			List<Price> prices = productService.findOne(price.getProductId()).getPrices();
 			for(Price pr: prices){
 				pr.setCurrent(false);
 			}

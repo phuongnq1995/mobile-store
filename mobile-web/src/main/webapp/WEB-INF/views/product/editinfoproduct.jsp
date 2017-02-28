@@ -5,6 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <h1>Edit Product</h1>
+<c:forEach var="image" items="${product.getImages()}">
+	<img
+		src="${pageContext.request.contextPath}/imageShow/${image.getId()}"
+		width="50px" height="50px" />
+</c:forEach>
 <form:form method="POST" modelAttribute="product" action="update">
 	<table class="table table-striped">
 		<tr>

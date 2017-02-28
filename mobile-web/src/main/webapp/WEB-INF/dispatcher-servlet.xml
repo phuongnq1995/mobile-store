@@ -13,13 +13,11 @@
 
 	<import resource="appconfig-mvc.xml" />
 	<import resource="appconfig-data.xml" />
-	<import resource="appconfig-security.xml" />
 	
 	<import resource="classpath:productApplicationContext.xml" />
 	<import resource="classpath:categoryApplicationContext.xml" />
 	<import resource="classpath:publisherApplicationContext.xml" />
 	<import resource="classpath:priceApplicationContext.xml" />
 	<import resource="classpath:imageApplicationContext.xml" />
-	<import resource="classpath:userApplicationContext.xml" />
 	
 </beans>

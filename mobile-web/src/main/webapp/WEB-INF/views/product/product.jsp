@@ -26,7 +26,7 @@
 					<td>${product.description}</td>
 					<td>${product.category.name}</td>
 					<td>${product.publisher.name}</td>
-					<td>${product.getCurrentPrice().money}</td>
+					<td>${product.getCurrentPrice().money}$</td>
 					<td><c:forEach var="image" items="${product.getImages()}">
 							<img src="${pageContext.request.contextPath}/imageShow/${image.getId()}"
 								 width="50px" height="50px"/>

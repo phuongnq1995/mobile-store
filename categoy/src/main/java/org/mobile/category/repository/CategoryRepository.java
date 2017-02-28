@@ -1,4 +1,4 @@
-package org.mobile.categoy.repository;
+package org.mobile.category.repository;
 
 import org.mobile.category.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

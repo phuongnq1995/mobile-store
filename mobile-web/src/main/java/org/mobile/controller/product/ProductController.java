@@ -7,6 +7,7 @@ import org.mobile.converter.CategoryEditor;
 import org.mobile.converter.PublisherEditor;
 import org.mobile.image.model.Image;
 import org.mobile.price.model.Price;
+import org.mobile.price.service.PriceService;
 import org.mobile.category.model.Category;
 import org.mobile.product.model.Product;
 import org.mobile.category.service.CategoryService;
@@ -40,6 +41,9 @@ public class ProductController {
 
 	@Autowired
 	private PublisherService publisherService;
+	
+	@Autowired
+	private PriceService priceService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -63,9 +67,9 @@ public class ProductController {
 
 	Product newProduct() {
 		Product product = new Product();
-		List<Price> prices = new ArrayList<Price>();
+		List<Price> prices = new ArrayList<Price>() ;
 		Price price = new Price();
-		price.setProduct_id(product.getId());
+		price.setProductId(product.getId());
 		prices.add(price);
 		product.setPrices(prices);
 		return product;
@@ -76,38 +80,35 @@ public class ProductController {
 		model.addAttribute("product", newProduct());
 		return "newproduct";
 	}
-	
+
 	@RequestMapping(value = "/product/new", method = RequestMethod.POST)
 	String createProduct(RedirectAttributes redirectAttributes, @Valid Product product, BindingResult bindingResult,
-			@RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
-		List<Image> images = new ArrayList<Image>();
-		for (CommonsMultipartFile aFile : fileUpload) {
-			if (aFile.getBytes().length > 0) {
-				Image image = new Image();
-				image.setData(aFile.getBytes());
-				image.setProduct_id(product.getId());
-				images.add(image);
-			}
-		}
-		product.setImages(images);
+			@RequestParam("fileUpload") CommonsMultipartFile[] fileUpload) throws Exception {
 		if (bindingResult.hasErrors())
 			return "newproduct";
-		else
+		else{
+			List<Image> images = new ArrayList<Image>();
+			for (CommonsMultipartFile aFile : fileUpload) {
+				if (!aFile.isEmpty()) {
+					Image image = new Image();
+					image.setData(aFile.getBytes());
+					image.setProduct(product);
+					images.add(image);
+				}
+			}
+			product.setImages(images);
 			redirectAttributes.addFlashAttribute("message", productService.save(product));
+		}
 		return "redirect:/product";
 	}
 
-	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/product/info/{id}", method = RequestMethod.GET)
 	String editProduct(Model model, @PathVariable int id) {
-		Product product = productService.findOne(id);
-		Price price = new Price();
-		price.setProduct_id(product.getId());
-		product.getPrices().add(price);
-		model.addAttribute("product", product);
+		model.addAttribute("product", productService.findOne(id));
 		return "editinfoproduct";
 	}
 
-	@RequestMapping(value = "/product/update", method = RequestMethod.POST)
+	@RequestMapping(value = "product/info/update", method = RequestMethod.POST)
 	String updateProduct(RedirectAttributes redirectAttributes, @ModelAttribute Product product,
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
@@ -119,8 +120,11 @@ public class ProductController {
 
 	@RequestMapping(value = "/product/delete/{id}", method = RequestMethod.GET)
 	String deleteUser(@PathVariable int id, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", productService.delete(id));
+		if(priceService.deleteByProductId(id) == "Delete success !")
+			redirectAttributes.addFlashAttribute("message", productService.delete(id));
+		else 
+			redirectAttributes.addFlashAttribute("message", "Delete fail !");
 		return "redirect:/product";
 	}
-	
+
 }

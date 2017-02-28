@@ -5,8 +5,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <h3>Edit Price Product</h3>
+
 <c:forEach var="pr" items="${listPrices}">
-	Old Price: ${pr.money}"
+
+	<c:if test="${pr.getCurrent() == false}">
+		Older price: ${pr.money}$
+	</c:if> <c:if test="${pr.getCurrent() == true}">
+		Current price: ${pr.money}$
+	</c:if>
+	<br>
 </c:forEach>
 <form:form method="POST" modelAttribute="price" action="update">
 	<tr>

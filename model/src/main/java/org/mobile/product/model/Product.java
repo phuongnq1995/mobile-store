@@ -55,9 +55,7 @@ public class Product implements Serializable{
 	@JoinColumn(name="product_id")
 	private List<Price> prices;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinColumn(name="product_id")
+	@OneToMany(mappedBy="product", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Image> images;
 	
 	public int getId() {

@@ -38,12 +38,12 @@
 			</c:forEach>
 		</tr>
 		<tr>
-			<td>Image :
+			<td>Images :
+ 				<input type="file" name="fileUpload" size="50" accept="image/*"/>
 				<input type="file" name="fileUpload" size="50" accept="image/*"/>
 				<input type="file" name="fileUpload" size="50" accept="image/*"/>
 				<input type="file" name="fileUpload" size="50" accept="image/*"/>
-				<input type="file" name="fileUpload" size="50" accept="image/*"/>
-				<input type="file" name="fileUpload" size="50" accept="image/*"/>
+				<input type="file" name="fileUpload" size="50" accept="image/*"/> 
 			</td>
 		</tr>
 		<tr>

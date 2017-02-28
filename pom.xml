@@ -122,10 +122,10 @@
 		<module>mobile-web</module>
 		<module>product</module>
 		<module>model</module>
-		<module>categoy</module>
+		
 		<module>publisher</module>
 		<module>price</module>
 		<module>image</module>
-		<module>user</module>
+		<module>categoy</module>
 	</modules>
 </project>

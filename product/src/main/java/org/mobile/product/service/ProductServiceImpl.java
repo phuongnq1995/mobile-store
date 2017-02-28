@@ -40,7 +40,6 @@ public class ProductServiceImpl implements ProductService {
 		return "Save success !";
 	}
 
-	@Transactional
 	public Product findOne(int id) {
 		return productRepository.findOne(id);
 	}
