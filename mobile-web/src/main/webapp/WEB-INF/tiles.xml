@@ -20,26 +20,49 @@
 	</definition>
 
 	<definition name="product" extends="base-definition">
-		<put-attribute name="title" value="welcome" />
+		<put-attribute name="title" value="Products" />
 		<put-attribute name="body" value="/WEB-INF/views/product/product.jsp" />
 	</definition>
 
 	<definition name="newproduct" extends="base-definition">
-		<put-attribute name="title" value="welcome" />
+		<put-attribute name="title" value="New Product" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/product/newproduct.jsp" />
 	</definition>
 
 	<definition name="editinfoproduct" extends="base-definition">
-		<put-attribute name="title" value="welcome" />
+		<put-attribute name="title" value="Edit Information Product" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/product/editinfoproduct.jsp" />
 	</definition>
 
 	<definition name="editpriceproduct" extends="base-definition">
-		<put-attribute name="title" value="welcome" />
+		<put-attribute name="title" value="Edit Prices Product" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/product/editpriceproduct.jsp" />
 	</definition>
-	
+
+	<definition name="categories" extends="base-definition">
+		<put-attribute name="title" value="Categories" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/category/categories.jsp" />
+	</definition>
+
+	<definition name="savecategory" extends="base-definition">
+		<put-attribute name="title" value="Save Category" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/category/savecategory.jsp" />
+	</definition>
+
+	<definition name="publishers" extends="base-definition">
+		<put-attribute name="title" value="Publishers" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/publisher/publishers.jsp" />
+	</definition>
+
+	<definition name="savepublisher" extends="base-definition">
+		<put-attribute name="title" value="Save Publisher" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/publisher/savepublisher.jsp" />
+	</definition>
 </tiles-definitions>

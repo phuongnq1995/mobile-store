@@ -41,7 +41,7 @@ public class ProductController {
 
 	@Autowired
 	private PublisherService publisherService;
-	
+
 	@Autowired
 	private PriceService priceService;
 
@@ -67,7 +67,7 @@ public class ProductController {
 
 	Product newProduct() {
 		Product product = new Product();
-		List<Price> prices = new ArrayList<Price>() ;
+		List<Price> prices = new ArrayList<Price>();
 		Price price = new Price();
 		price.setProductId(product.getId());
 		prices.add(price);
@@ -86,7 +86,7 @@ public class ProductController {
 			@RequestParam("fileUpload") CommonsMultipartFile[] fileUpload) throws Exception {
 		if (bindingResult.hasErrors())
 			return "newproduct";
-		else{
+		else {
 			List<Image> images = new ArrayList<Image>();
 			for (CommonsMultipartFile aFile : fileUpload) {
 				if (!aFile.isEmpty()) {
@@ -97,7 +97,7 @@ public class ProductController {
 				}
 			}
 			product.setImages(images);
-			redirectAttributes.addFlashAttribute("message", productService.save(product));
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", productService.save(product));
 		}
 		return "redirect:/product";
 	}
@@ -109,21 +109,21 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "product/info/update", method = RequestMethod.POST)
-	String updateProduct(RedirectAttributes redirectAttributes, @ModelAttribute Product product,
+	String updateProduct(RedirectAttributes redirectAttributes, @Valid Product product,
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "editinfoproduct";
 		else
-			redirectAttributes.addFlashAttribute("message", productService.save(product));
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", productService.save(product));
 		return "redirect:/product";
 	}
 
 	@RequestMapping(value = "/product/delete/{id}", method = RequestMethod.GET)
 	String deleteUser(@PathVariable int id, RedirectAttributes redirectAttributes) {
-		if(priceService.deleteByProductId(id) == "Delete success !")
-			redirectAttributes.addFlashAttribute("message", productService.delete(id));
-		else 
-			redirectAttributes.addFlashAttribute("message", "Delete fail !");
+		if (priceService.deleteByProductId(id) == "Delete success !")
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", productService.delete(id));
+		else
+			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "Delete fail !");
 		return "redirect:/product";
 	}
 

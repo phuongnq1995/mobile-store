@@ -2,13 +2,16 @@ package org.mobile.category.model;
 
 import java.io.Serializable;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.mobile.product.model.Product;
 
@@ -19,13 +22,16 @@ public class Category implements Serializable{
 
 		private static final long serialVersionUID = 1L;
 		
-		@Id
+		@Id@GeneratedValue(strategy=GenerationType.AUTO)
 		private int id;
 		
 		@Column
+		@Size(min=2, max=32)
+		@Pattern(regexp="[a-zA-Z0-9-]+", message="Not contain special characters.")
 		private String name;
 		
 		@Column
+		@Size(min=3, max=500)
 		private String description;
 		
 		public Category(int id, String name, String description) {

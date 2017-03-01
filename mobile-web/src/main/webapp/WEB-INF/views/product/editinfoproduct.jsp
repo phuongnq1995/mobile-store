@@ -4,42 +4,54 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<h1>Edit Product</h1>
+<h3>Edit Product</h3>
 <c:forEach var="image" items="${product.getImages()}">
 	<img
 		src="${pageContext.request.contextPath}/imageShow/${image.getId()}"
 		width="50px" height="50px" />
 </c:forEach>
-<form:form method="POST" modelAttribute="product" action="update">
-	<table class="table table-striped">
-		<tr>
-			<td></td>
-			<td><form:hidden path="id" /></td>
-		</tr>
-		<tr>
-			<td>Name :</td>
-			<td><form:input path="name" /></td>
-			<td><form:errors path="name" cssClass="error" /></td>
-		</tr>
-		<tr>
-			<td>Category : <form:select path="category"
-					items="${categories}" itemValue="id" itemLabel="name" />
-			</td>
-			<td><form:errors path="category" cssClass="error" /></td>
-		</tr>
-		<tr>
-			<td>Publisher : <form:select path="publisher"
-					items="${publisherList}" itemValue="id" itemLabel="name" />
-			</td>
-			<td><form:errors path="publisher" cssClass="error" /></td>
-		</tr>
-		<tr>
-			<td>Description :</td>
-			<td><form:input path="description" /></td>
-			<td><form:errors path="description" cssClass="error" /></td>
-		</tr>
-		<tr>
-			<td><input type="submit" value="Save" /></td>
-		</tr>
-	</table>
+<form:form method="POST" modelAttribute="product" action="update"
+	class="form-horizontal">
+	<form:hidden path="id" />
+	<div class="form-group">
+		<form:label path="name" class="control-label col-sm-2">Name:</form:label>
+		<div class="col-sm-5">
+			<form:input path="name" class="form-control" />
+			<span class="error text-danger"><form:errors path="name" /></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<form:label path="category" class="control-label col-sm-2">Category :</form:label>
+		<div class="col-sm-5">
+			<form:select path="category" items="${categories}" itemValue="id"
+				itemLabel="name" class="form-control" />
+			<span class="error text-danger"><form:errors path="category" /></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<form:label path="publisher" class="control-label col-sm-2">Publisher :</form:label>
+		<div class="col-sm-5">
+			<form:select path="publisher" items="${publisherList}" itemValue="id"
+				itemLabel="name" class="form-control" />
+			<span class="error text-danger"><form:errors path="publisher" /></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<form:label path="description" class="control-label col-sm-2">Description:</form:label>
+		<div class="col-sm-5">
+			<form:textarea path="description" class="form-control" />
+			<span class="error text-danger"><form:errors
+					path="description" /></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<form:label path="quantity" class="control-label col-sm-2">Quantity :</form:label>
+		<div class="col-sm-5">
+			<form:input path="quantity" class="form-control" type="number"/>
+			<span class="error text-danger"><form:errors path="quantity"/></span>
+		</div>
+	</div>
+	<div class="col-sm-5">
+		<input type="submit" value="Save" class="col-sm-3 pull-right" />
+	</div>
 </form:form>

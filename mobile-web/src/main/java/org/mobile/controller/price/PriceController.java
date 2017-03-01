@@ -1,15 +1,14 @@
 package org.mobile.controller.price;
 
 import java.util.List;
+import javax.validation.Valid;
 import org.mobile.price.model.Price;
 import org.mobile.price.service.PriceService;
 import org.mobile.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @SessionAttributes("price")
-@Transactional
 public class PriceController {
 	
 	@Autowired
@@ -35,12 +33,13 @@ public class PriceController {
 		model.addAttribute("price", price);
 		return "editpriceproduct";
 	}
-
+	
 	@RequestMapping(value = "/product/price/update", method = RequestMethod.POST)
-	String updatePricesProduct(RedirectAttributes redirectAttributes, @ModelAttribute Price price,
-			BindingResult bindingResult) {
-		if (bindingResult.hasErrors())
-			return "editinfoproduct";
+	String updatePricesProduct(RedirectAttributes redirectAttributes, @Valid Price price,
+		BindingResult bindingResult) throws Exception {
+		if (bindingResult.hasErrors()){
+			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "Can not update prices !");
+			return "editinfoproduct";}
 		else
 		{
 			List<Price> prices = productService.findOne(price.getProductId()).getPrices();
@@ -49,7 +48,7 @@ public class PriceController {
 			}
 			price.setCurrent(true);
 			prices.add(price);
-			redirectAttributes.addFlashAttribute("message", priceService.saveAllList(prices));
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", priceService.saveAllList(prices));
 		}
 		return "redirect:/product";
 	}

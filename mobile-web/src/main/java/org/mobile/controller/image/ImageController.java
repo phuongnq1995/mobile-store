@@ -21,7 +21,6 @@ public class ImageController {
 	public byte[] showImage(@PathVariable int id) {
 		Image image = imageService.findOne(id);
 		if (image != null) {
-			System.out.println("In here");
 			return image.getData();
 		}
 		return null;
