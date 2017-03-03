@@ -3,15 +3,23 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="container">
-	<h3 class="center-block">Edit Publisher</h3>
+	<h3 class="center-block">New Category</h3>
 </div>
-<form:form method="POST" modelAttribute="publisher" action="save"
+<form:form method="POST" modelAttribute="category" action="new"
 	class="form-horizontal">
 	<div class="form-group">
 		<form:label path="name" class="control-label col-sm-2">Name:</form:label>
 		<div class="col-sm-5">
-			<form:input path="name" class="form-control"/>
+			<form:input path="name" class="form-control" />
 			<span class="error text-danger"><form:errors path="name" /></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<form:label path="description" class="control-label col-sm-2">Description:</form:label>
+		<div class="col-sm-5">
+			<form:input path="description" class="form-control" />
+			<span class="error text-danger"><form:errors
+					path="description" /></span>
 		</div>
 	</div>
 	<div class="row">
@@ -19,6 +27,6 @@
 		<input type="submit" value="Save" class="col-sm-3 pull-right btn btn-success" />
 	</div>
 	<div class="col-sm-4">
-		<a type="button" class="col-sm-3 btn btn-default" href="${pageContext.request.contextPath}/publisher">Back</a>
+		<a type="button" class="col-sm-3 btn btn-default" href="${pageContext.request.contextPath}/categories">Back</a>
 	</div></div>
 </form:form>

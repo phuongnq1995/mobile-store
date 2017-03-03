@@ -65,4 +65,16 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/publisher/savepublisher.jsp" />
 	</definition>
+
+	<definition name="newpublisher" extends="base-definition">
+		<put-attribute name="title" value="New Publisher" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/publisher/newpublisher.jsp" />
+	</definition>
+
+	<definition name="newcategory" extends="base-definition">
+		<put-attribute name="title" value="New Category" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/category/newcategory.jsp" />
+	</definition>
 </tiles-definitions>

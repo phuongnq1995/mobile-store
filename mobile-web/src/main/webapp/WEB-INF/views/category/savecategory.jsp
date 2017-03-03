@@ -2,8 +2,6 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <div class="container">
 	<h3 class="center-block">Save Category</h3>
 </div>
@@ -24,7 +22,14 @@
 					path="description" /></span>
 		</div>
 	</div>
-	<div class="col-sm-5">
-		<input type="submit" value="Save" class="col-sm-3 pull-right" />
+	<div class="row">
+		<div class="col-sm-4">
+			<input type="submit" value="Save"
+				class="col-sm-3 pull-right btn btn-success" />
+		</div>
+		<div class="col-sm-4">
+			<a type="button" class="col-sm-3 btn btn-default"
+				href="${pageContext.request.contextPath}/categories">Back</a>
+		</div>
 	</div>
 </form:form>

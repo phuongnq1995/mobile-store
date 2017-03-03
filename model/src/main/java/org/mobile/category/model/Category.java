@@ -27,7 +27,7 @@ public class Category implements Serializable{
 		
 		@Column
 		@Size(min=2, max=32)
-		@Pattern(regexp="[a-zA-Z0-9-]+", message="Not contain special characters.")
+		@Pattern(regexp="([a-zA-Z0-9-_ ]+)", message="Not contain special characters.")
 		private String name;
 		
 		@Column

@@ -5,6 +5,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <h3>Edit Price Product</h3>
+<c:forEach var="pr" items="${listPrices}">
+	<div class="row">
+		<c:if test="${pr.getCurrent() == false}">
+
+			<label class="control-label col-sm-2">Older price:
+				${pr.money}$ </label>
+		</c:if>
+		<c:if test="${pr.getCurrent() == true}">
+			<label class="control-label col-sm-2">Current price:
+				${pr.money}$ </label>
+		</c:if>
+	</div>
+</c:forEach>
 <div class="row container">
 	<c:if test="${ERROR_MESSAGE != null}">
 		<div class="col-sm-3 alert alert-danger">
@@ -12,21 +25,17 @@
 		</div>
 	</c:if>
 </div>
-<c:forEach var="pr" items="${listPrices}">
-
-	<c:if test="${pr.getCurrent() == false}">
-		Older price: ${pr.money}$
-	</c:if> <c:if test="${pr.getCurrent() == true}">
-		Current price: ${pr.money}$
-	</c:if>
-	<br>
-</c:forEach>
 <form:form method="POST" modelAttribute="price" action="update">
-	<tr>
-		<td>New price: <form:input path="money" type="number"/></td>
-		<td><form:errors path="money" /></td>
-	</tr>
-	<tr>
-		<td><input type="submit" value="Save" /></td>
-	</tr>
+	<span class="error text-danger"><form:errors path="money" /></span>
+	<div class="form-group row">
+		<form:label path="money" class="control-label col-sm-2">New price: </form:label>
+		<div class="col-sm-3">
+			<form:input path="money" class="form-control" type="number" />
+			<span class="error text-danger"><form:errors path="money" /></span>
+		</div>
+	</div>
+	<div class="row">
+		<input type="submit" value="Save" class="btn btn-success" />
+		<a type="button" class="btn btn-default" href="${pageContext.request.contextPath}/product">Back</a>
+	</div>
 </form:form>

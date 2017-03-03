@@ -3,9 +3,9 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="container">
-	<h3 class="center-block">Edit Publisher</h3>
+	<h3 class="center-block">New Publisher</h3>
 </div>
-<form:form method="POST" modelAttribute="publisher" action="save"
+<form:form method="POST" modelAttribute="publisher" action="new"
 	class="form-horizontal">
 	<div class="form-group">
 		<form:label path="name" class="control-label col-sm-2">Name:</form:label>
@@ -19,6 +19,6 @@
 		<input type="submit" value="Save" class="col-sm-3 pull-right btn btn-success" />
 	</div>
 	<div class="col-sm-4">
-		<a type="button" class="col-sm-3 btn btn-default" href="${pageContext.request.contextPath}/publisher">Back</a>
+		<a type="button" class="col-sm-3 btn btn-default" href="${pageContext.request.contextPath}/publishers">Back</a>
 	</div></div>
 </form:form>

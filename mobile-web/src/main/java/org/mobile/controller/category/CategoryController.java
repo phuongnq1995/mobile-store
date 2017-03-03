@@ -29,16 +29,16 @@ public class CategoryController {
 	@RequestMapping(value = "/category/new", method = RequestMethod.GET)
 	String newProduct(Model model) {
 		model.addAttribute("category", new Category());
-		return "savecategory";
+		return "newcategory";
 	}
 
-	@RequestMapping(value = "/category/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/category/new", method = RequestMethod.POST)
 	String createProduct(RedirectAttributes redirectAttributes, @Valid Category category, BindingResult bindingResult)
 			throws Exception {
 		if(categoryService.findByName(category.getName()) != null)
 			bindingResult.rejectValue("name", "Duplicate.name");
 		if (bindingResult.hasErrors()) 
-			return "savecategory";
+			return "newcategory";
 		else 
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", categoryService.save(category));
 		return "redirect:/categories";
@@ -48,6 +48,16 @@ public class CategoryController {
 	String editProduct(Model model, @PathVariable int id) {
 		model.addAttribute("category", categoryService.findOne(id));
 		return "savecategory";
+	}
+	
+	@RequestMapping(value = "/category/save", method = RequestMethod.POST)
+	String updateProduct(RedirectAttributes redirectAttributes, @Valid Category category, BindingResult bindingResult)
+			throws Exception {
+		if (bindingResult.hasErrors()) 
+			return "savecategory";
+		else 
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", categoryService.save(category));
+		return "redirect:/categories";
 	}
 
 	@RequestMapping(value = "/category/delete/{id}", method = RequestMethod.GET)

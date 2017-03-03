@@ -29,17 +29,27 @@ public class PublisherController {
 	@RequestMapping(value = "/publisher/new", method = RequestMethod.GET)
 	String newPublisher(Model model) {
 		model.addAttribute("publisher", new Publisher());
-		return "savepublisher";
+		return "newpublisher";
 	}
-
+	
+	@RequestMapping(value = "/publisher/new", method = RequestMethod.POST)
+	String newPublisher(RedirectAttributes redirectAttributes, @Valid Publisher publisher, BindingResult bindingResult)
+			throws Exception {
+		if (publisherService.findByName(publisher.getName()) != null)
+			bindingResult.reject("name", "Duplicate.name");
+		if (bindingResult.hasErrors())
+			return "newpublisher";
+		else
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", publisherService.save(publisher));
+		return "redirect:/publishers";
+	}
+	
 	@RequestMapping(value = "/publisher/save", method = RequestMethod.POST)
 	String savePublisher(RedirectAttributes redirectAttributes, @Valid Publisher publisher, BindingResult bindingResult)
 			throws Exception {
-		if(publisherService.findByName(publisher.getName()) != null)
-			bindingResult.reject("name", "Duplicate.name");
-		if (bindingResult.hasErrors()) 
+		if (bindingResult.hasErrors())
 			return "savepublisher";
-		else 
+		else
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", publisherService.save(publisher));
 		return "redirect:/publishers";
 	}
@@ -52,10 +62,11 @@ public class PublisherController {
 
 	@RequestMapping(value = "/publisher/delete/{id}", method = RequestMethod.GET)
 	String deletePublisher(@PathVariable int id, RedirectAttributes redirectAttributes) {
-		if (publisherService.findOne(id).getProducts().isEmpty())
+		if (publisherService.findOne(id).getProducts().isEmpty()) {
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", publisherService.delete(id));
-		else
+		} else {
 			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "You need delete all products of this publisher !");
+		}
 		return "redirect:/publishers";
 	}
 }

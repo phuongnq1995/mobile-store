@@ -71,7 +71,11 @@
 				type="file" name="fileUpload" size="50" accept="image/*" />
 		</div>
 	</div>
-	<div class="col-sm-5">
-		<input type="submit" value="Save" class="col-sm-3 pull-right" />
+	<div class="row">
+	<div class="col-sm-4">
+		<input type="submit" value="Save" class="col-sm-3 pull-right btn btn-success" />
 	</div>
+	<div class="col-sm-4">
+		<a type="button" class="col-sm-3 btn btn-default" href="${pageContext.request.contextPath}/product">Back</a>
+	</div></div>
 </form:form>

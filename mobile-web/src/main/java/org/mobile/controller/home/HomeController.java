@@ -1,6 +1,5 @@
 package org.mobile.controller.home;
 
-import org.mobile.product.model.Product;
 import org.mobile.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

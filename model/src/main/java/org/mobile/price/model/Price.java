@@ -32,6 +32,7 @@ public class Price implements Serializable{
 	private boolean current = true;
 	
 	@Column(name="product_id", nullable=true)
+	@NotNull
 	private int productId;
 	
 	public int getId() {
