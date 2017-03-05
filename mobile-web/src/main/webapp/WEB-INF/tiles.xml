@@ -8,6 +8,8 @@
 		<put-attribute name="title" value="" />
 		<put-attribute name="header"
 			value="/WEB-INF/views/template/defaultHeader.jsp" />
+		<put-attribute name="sidebar"
+			value="/WEB-INF/views/template/defaultSidebar.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer"
 			value="/WEB-INF/views/template/defaultFooter.jsp" />

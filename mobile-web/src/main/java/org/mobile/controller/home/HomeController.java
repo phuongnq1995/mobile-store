@@ -15,7 +15,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method=RequestMethod.GET)
     public String getView(Model model) {
-  
+		model.addAttribute("products", productService.findAll());
     	return "welcome";
     }
 	
