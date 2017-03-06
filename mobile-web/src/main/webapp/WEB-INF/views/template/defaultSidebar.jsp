@@ -1,6 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div id="sidebar" class="span3">
 	<div class="well well-small">
 		<a id="myCart" href="product_summary.html"><img
@@ -8,33 +9,21 @@
 			Items in your cart <span class="badge badge-warning pull-right">$155.00</span></a>
 	</div>
 	<ul id="sideManu" class="nav nav-tabs nav-stacked">
-		<li class="subMenu open"><a> ELECTRONICS [230]</a>
+		<li class="subMenu open"><a> CATEGORIES [230]</a>
 			<ul>
-				<li><a class="active" href="products.html"><i
-						class="icon-chevron-right"></i>Cameras (100) </a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Computers,
-						Tablets & Laptop (30)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Mobile
-						Phone (80)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Sound
-						& Vision (15)</a></li>
+				<c:forEach items="${categories}" var="category">
+					<li><a class="active"
+						href="${pageContext.request.contextPath}/productbycategory/${category.id}"><i
+							class="icon-chevron-right"></i>${category.name} (100) </a></li>
+				</c:forEach>
 			</ul></li>
-		<li class="subMenu"><a> CLOTHES [840] </a>
-			<ul style="display: none">
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Women's
-						Clothing (45)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Women's
-						Shoes (8)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Women's
-						Hand Bags (5)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Men's
-						Clothings (45)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Men's
-						Shoes (6)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Kids
-						Clothing (5)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Kids
-						Shoes (3)</a></li>
+		<li class="subMenu open"><a> PUBLISHERS [840] </a>
+			<ul>
+				<c:forEach items="${publishers}" var="publisher">
+					<li><a class="active"
+						href="${pageContext.request.contextPath}/productbypublisher/${publisher.id}"><i
+							class="icon-chevron-right"></i>${publisher.name} (45)</a></li>
+				</c:forEach>
 			</ul></li>
 		<li class="subMenu"><a>FOOD AND BEVERAGES [1000]</a>
 			<ul style="display: none">

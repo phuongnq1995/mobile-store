@@ -22,7 +22,7 @@
 											<h5>${product.name}</h5>
 											<h4>
 												<a class="btn" href="product_details.html">VIEW</a> <span
-													class="pull-right">$${product.getCurrentPrice().money}</span>
+													class="pull-right">$${product.getCurrentPrice().money}.00</span>
 											</h4>
 										</div>
 									</div>
@@ -58,9 +58,9 @@
 			</div>
 		</div>
 	</div>
-	<h4>New Products</h4>
-	<ul class="thumbnails">
-		<c:forEach var="product" items="${products}">
+	<h4>List Products</h4>
+	<ul class="thumbnails" id="result">
+		<c:forEach var="product" items="${searchProducts}">
 			<li class="span3">
 				<div class="thumbnail">
 					<a href="product_details.html"><img

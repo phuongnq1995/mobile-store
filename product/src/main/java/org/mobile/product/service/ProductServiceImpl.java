@@ -44,4 +44,12 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findOne(id);
 	}
 
+	public List<Product> findByCategoryId(int category_id) {
+		return productRepository.findByCategoryId(category_id);
+	}
+
+	public List<Product> findByPublisherId(int publisher_id) {
+		return productRepository.findByPublisherId(publisher_id);
+	}
+
 }
