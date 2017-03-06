@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @SessionAttributes("category")
+@RequestMapping("/admin")
 public class CategoryController {
 
 	@Autowired
@@ -41,7 +42,7 @@ public class CategoryController {
 			return "newcategory";
 		else 
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", categoryService.save(category));
-		return "redirect:/categories";
+		return "redirect:/admin/categories";
 	}
 
 	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
@@ -57,7 +58,7 @@ public class CategoryController {
 			return "savecategory";
 		else 
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", categoryService.save(category));
-		return "redirect:/categories";
+		return "redirect:/admin/categories";
 	}
 
 	@RequestMapping(value = "/category/delete/{id}", method = RequestMethod.GET)
@@ -66,6 +67,6 @@ public class CategoryController {
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", categoryService.delete(id));
 		else
 			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "You need delete all products of this category !");
-		return "redirect:/categories";
+		return "redirect:/admin/categories";
 	}
 }

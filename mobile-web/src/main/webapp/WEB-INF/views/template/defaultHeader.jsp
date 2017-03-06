@@ -8,7 +8,6 @@
 	<div class="pull-right">
 		<span class="btn btn-mini">En</span>
 		<span class="btn btn-mini">$155.00</span>
-		<a href="product_summary.html"><span class="">$</span></a>
 		<a href="product_summary.html"><span class="btn btn-mini btn-primary">
 		<i class="fa fa-shopping-cart" style="font-size:16px;color:white"></i> [ 3 ] Itemes in your cart </span> </a> 
 	</div>
@@ -22,7 +21,7 @@
 	<span class="icon-bar"></span>
 </a>
   <div class="navbar-inner">
-    <a class="brand" href="index.html"><img src="<c:url value="/resources/images/logo.png"/>" alt="Bootsshop"/></a>
+    <a class="brand" href="${pageContext.request.contextPath}/"><img src="<c:url value="/resources/images/logo.png"/>" alt="Bootsshop"/></a>
 		<form class="form-inline navbar-search" method="post" action="products.html" >
 		<input id="srchFld" class="srchTxt" type="text" />
 		  <select class="srchTxt">

@@ -31,7 +31,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @SessionAttributes("product")
-public class ProductController {
+@RequestMapping("/admin")
+public class AdminController {
 
 	@Autowired
 	private ProductService productService;
@@ -74,7 +75,14 @@ public class ProductController {
 		product.setPrices(prices);
 		return product;
 	}
-
+	
+	@RequestMapping(value = "/product", method = RequestMethod.GET)
+	String showPage(Model model) {
+		List<Product> products = productService.findAll();
+		model.addAttribute("products", products);
+		return "product";
+	}
+	
 	@RequestMapping(value = "/product/new", method = RequestMethod.GET)
 	String newProduct(Model model) {
 		model.addAttribute("product", newProduct());
@@ -99,7 +107,7 @@ public class ProductController {
 			product.setImages(images);
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", productService.save(product));
 		}
-		return "redirect:/product";
+		return "redirect:/admin/product";
 	}
 
 	@RequestMapping(value = "/product/info/{id}", method = RequestMethod.GET)
@@ -115,7 +123,7 @@ public class ProductController {
 			return "editinfoproduct";
 		else
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", productService.save(product));
-		return "redirect:/product";
+		return "redirect:/admin/product";
 	}
 
 	@RequestMapping(value = "/product/delete/{id}", method = RequestMethod.GET)
@@ -124,7 +132,7 @@ public class ProductController {
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", productService.delete(id));
 		else
 			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "Delete fail !");
-		return "redirect:/product";
+		return "redirect:/admin/product";
 	}
 
 }

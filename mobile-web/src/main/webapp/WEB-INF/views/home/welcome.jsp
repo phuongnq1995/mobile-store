@@ -12,65 +12,74 @@
 				<div class="carousel-inner">
 					<div class="item active">
 						<ul class="thumbnails">
-							<li class="span3">
-								<div class="thumbnail">
-									<a href="product_details.html"><img
-										src="themes/images/products/1.jpg" alt=""></a>
-									<div class="caption">
-										<h5>Product name</h5>
-										<h4>
-											<a class="btn" href="product_details.html">VIEW</a> <span
-												class="pull-right">$222.00</span>
-										</h4>
+							<c:forEach var="product" items="${products}">
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="${pageContext.request.contextPath}/imageShow/${product.getImages().get(0).getId()}"
+											alt="" style="width: 260px; height: 250px;"></a>
+										<div class="caption">
+											<h5>${product.name}</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$${product.getCurrentPrice().money}</span>
+											</h4>
+										</div>
 									</div>
-								</div>
-							</li>
+								</li>
+							</c:forEach>
 						</ul>
 					</div>
 					<div class="item">
 						<ul class="thumbnails">
-							<li class="span3">
-								<div class="thumbnail">
-									<a href="product_details.html"><img
-										src="themes/images/products/2.jpg" alt=""></a>
-									<div class="caption">
-										<h5>Product name</h5>
-										<h4>
-											<a class="btn" href="product_details.html">VIEW</a> <span
-												class="pull-right">$222.00</span>
-										</h4>
+							<c:forEach var="product" items="${products}">
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="${pageContext.request.contextPath}/imageShow/${product.getImages().get(0).getId()}"
+											alt="" style="width: 260px; height: 250px;"></a>
+										<div class="caption">
+											<h5>${product.name}</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$${product.getCurrentPrice().money}</span>
+											</h4>
+										</div>
 									</div>
-								</div>
-							</li>
+								</li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>
-				<a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
-				<a class="right carousel-control" href="#featured" data-slide="next">›</a>
+				<a class="left carousel-control" href="#featured" data-slide="prev"><i
+					class="fa fa-chevron-left" style="font-size: 38px"></i></a> <a
+					class="right carousel-control" href="#featured" data-slide="next"><i
+					class="fa fa-chevron-right" style="font-size: 38px"></i></a>
 			</div>
 		</div>
 	</div>
 	<h4>New Products</h4>
-	<c:forEach var="product" items="${products}">
-		<ul class="thumbnails">
+	<ul class="thumbnails">
+		<c:forEach var="product" items="${products}">
 			<li class="span3">
 				<div class="thumbnail">
 					<a href="product_details.html"><img
 						src="${pageContext.request.contextPath}/imageShow/${product.getImages().get(0).getId()}"
-						alt="" /></a>
+						alt="" style="width: 260px; height: 250px;" /></a>
 					<div class="caption">
 						<h5>${product.name}</h5>
 						<p>${product.description}</p>
 						<h4 style="text-align: center">
-							<a class="btn" href="#"><i class="fa fa-search-plus" style="font-size:20px"></i></a>
-							<a class="btn" href="#" style="font-size: 15px">Add to <i class="fa fa-shopping-cart"
-								style="font-size: 20px"></i></a> <a class="btn btn-primary" href="#">$${product.getCurrentPrice().money}.00	</a>
+							<a class="btn" href="#"><i class="fa fa-search-plus"
+								style="font-size: 20px"></i></a> <a class="btn" href="#"
+								style="font-size: 15px">Add to <i
+								class="fa fa-shopping-cart" style="font-size: 20px"></i></a> <a
+								class="btn btn-primary" href="#">$${product.getCurrentPrice().money}.00
+							</a>
 						</h4>
 					</div>
 				</div>
 			</li>
-		</ul>
-
-	</c:forEach>
-
+		</c:forEach>
+	</ul>
 </div>

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @SessionAttributes("publisher")
+@RequestMapping("/admin")
 public class PublisherController {
 
 	@Autowired
@@ -41,7 +42,7 @@ public class PublisherController {
 			return "newpublisher";
 		else
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", publisherService.save(publisher));
-		return "redirect:/publishers";
+		return "redirect:/admin/publishers";
 	}
 	
 	@RequestMapping(value = "/publisher/save", method = RequestMethod.POST)
@@ -51,7 +52,7 @@ public class PublisherController {
 			return "savepublisher";
 		else
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", publisherService.save(publisher));
-		return "redirect:/publishers";
+		return "redirect:/admin/publishers";
 	}
 
 	@RequestMapping(value = "/publisher/{id}", method = RequestMethod.GET)
@@ -67,6 +68,6 @@ public class PublisherController {
 		} else {
 			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "You need delete all products of this publisher !");
 		}
-		return "redirect:/publishers";
+		return "redirect:/admin/publishers";
 	}
 }

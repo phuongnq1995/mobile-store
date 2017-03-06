@@ -18,11 +18,5 @@ public class HomeController {
 		model.addAttribute("products", productService.findAll());
     	return "welcome";
     }
-	
-	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	String showPage(Model model) {
-		model.addAttribute("products", productService.findAll());
-		return "product";
-	}
 
 }

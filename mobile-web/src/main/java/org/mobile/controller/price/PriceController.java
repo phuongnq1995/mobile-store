@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @SessionAttributes("price")
+@RequestMapping("/admin")
 public class PriceController {
 
 	@Autowired
@@ -55,7 +56,7 @@ public class PriceController {
 		        messages = messages+" "+ err;
 			}
 			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", messages);
-			return "redirect:/product/price/" + price.getProductId();
+			return "redirect:/admin/product/price/" + price.getProductId();
 		} else {
 			List<Price> prices = productService.findOne(price.getProductId()).getPrices();
 			for (Price pr : prices) {
@@ -65,6 +66,6 @@ public class PriceController {
 			prices.add(price);
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", priceService.saveAllList(prices));
 		}
-		return "redirect:/product";
+		return "redirect:/admin/product";
 	}
 }

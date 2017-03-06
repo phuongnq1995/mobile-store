@@ -35,7 +35,8 @@
 	<footer class="footer-content">
 		<tiles:insertAttribute name="footer" />
 	</footer>
-	<script src="<c:url value="/resources/js/jquery-1.9.1.min.js"/>"></script>
+	<%-- <script src="<c:url value="/resources/js/jquery-1.9.1.min.js"/>"></script> --%>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/google-code-prettify/prettify.js"/>"></script>
 	<script src="<c:url value="/resources//js/bootshop.js"/>"></script>
