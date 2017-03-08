@@ -20,7 +20,7 @@ public class Price implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
 	
 	@Column
 	@Min(0)@Max(10000)
@@ -31,14 +31,13 @@ public class Price implements Serializable{
 	@Basic
 	private boolean current = true;
 	
-	@Column(name="product_id", nullable=true)
-	@NotNull
-	private int productId;
+	@Column(name="product_id")
+	private Long productId;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Long getMoney() {
@@ -53,15 +52,15 @@ public class Price implements Serializable{
 	public void setCurrent(Boolean current) {
 		this.current = current;
 	}
-	public int getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
-	public void setProductId(int productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 	public Price(){}
 	
-	public Price(int id, Long money, Boolean current) {
+	public Price(Long id, Long money, Boolean current) {
 		this.id = id;
 		this.money = money;
 		this.current = current;

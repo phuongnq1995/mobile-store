@@ -22,18 +22,18 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.mobile.category.model.Category;
 import org.mobile.image.model.Image;
+import org.mobile.order.model.OrderDetails;
 import org.mobile.price.model.Price;
 import org.mobile.publisher.model.Publisher;
 
 @Entity
 @Table(name="product")
 public class Product implements Serializable{
-	
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
 	
 	@Column
 	@Size(min=2, max=32)
@@ -61,17 +61,20 @@ public class Product implements Serializable{
 	@OneToMany(cascade=CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name="product_id")
-	@NotNull
 	@Valid
 	private List<Price> prices;
 	
 	@OneToMany(mappedBy="product", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@NotNull
 	private List<Image> images;
 	
-	public int getId() {
+	@OneToMany(mappedBy="product", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<OrderDetails> listOrderDetails;
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -123,6 +126,12 @@ public class Product implements Serializable{
 	}
 	public void setImages(List<Image> images) {
 		this.images = images;
+	}
+	public List<OrderDetails> getListOrderDetails() {
+		return listOrderDetails;
+	}
+	public void setListOrderDetails(List<OrderDetails> listOrderDetails) {
+		this.listOrderDetails = listOrderDetails;
 	}
 	
 }

@@ -20,7 +20,7 @@ public class User {
 
 	@Id
 	@NotNull
-	private String username;
+	private String email;
 
 	@Column
 	@NotNull
@@ -31,17 +31,17 @@ public class User {
 
 	@ManyToMany
 	@JoinTable(name = "user_role", 
-		joinColumns = @JoinColumn(name = "username"), 
+		joinColumns = @JoinColumn(name = "email"), 
 		inverseJoinColumns = @JoinColumn(name = "role_id"))
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<Role> roles;
 
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {

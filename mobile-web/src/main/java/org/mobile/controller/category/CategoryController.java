@@ -38,7 +38,7 @@ public class CategoryController {
 			throws Exception {
 		if(categoryService.findByName(category.getName()) != null)
 			bindingResult.rejectValue("name", "Duplicate.name");
-		if (bindingResult.hasErrors()) 
+		if (bindingResult.hasErrors())
 			return "newcategory";
 		else 
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", categoryService.save(category));
@@ -54,7 +54,7 @@ public class CategoryController {
 	@RequestMapping(value = "/category/save", method = RequestMethod.POST)
 	String updateProduct(RedirectAttributes redirectAttributes, @Valid Category category, BindingResult bindingResult)
 			throws Exception {
-		if (bindingResult.hasErrors()) 
+		if (bindingResult.hasErrors())
 			return "savecategory";
 		else 
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", categoryService.save(category));

@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.mobile.product.model.Product;
 
@@ -22,7 +23,7 @@ public class Image implements Serializable{
 	private int id;
 	
 	@Lob
-	@Column
+	@Column@NotNull
 	private byte[] data;
 	
 	@ManyToOne

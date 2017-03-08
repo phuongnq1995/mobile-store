@@ -1,8 +1,6 @@
 package org.mobile.controller.home;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.mobile.category.model.Category;
 import org.mobile.category.service.CategoryService;
 import org.mobile.publisher.model.Publisher;
@@ -22,15 +20,12 @@ public class GlobalController {
 	
 	@ModelAttribute("categories")
 	public List<Category> populateCategories() {
-		ArrayList<Category> categories = new ArrayList<Category>();
-		categories.addAll(categoryService.findAll());
-		return categories;
+		return categoryService.findAll();
 	}
 
 	@ModelAttribute("publishers")
 	public List<Publisher> populatePublisherList() {
-		ArrayList<Publisher> publisherList = new ArrayList<Publisher>();
-		publisherList.addAll(publisherService.findAll());
-		return publisherList;
+		return publisherService.findAll();
 	}
+	
 }

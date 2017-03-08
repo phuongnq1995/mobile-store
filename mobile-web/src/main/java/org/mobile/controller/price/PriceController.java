@@ -29,7 +29,7 @@ public class PriceController {
 	private ProductService productService;
 
 	@RequestMapping(value = "/product/price/{product_id}", method = RequestMethod.GET)
-	String editPricesProduct(Model model, @PathVariable int product_id) {
+	String editPricesProduct(Model model, @PathVariable Long product_id) {
 		model.addAttribute("listPrices", productService.findOne(product_id).getPrices());
 		Price price = new Price();
 		price.setProductId(product_id);

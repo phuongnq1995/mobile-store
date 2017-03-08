@@ -3,7 +3,7 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="span9">
-	<div class="container">
+	<div class="row-fluid">
 		<h3 class="center-block">New Publisher</h3>
 	</div>
 	<form:form method="POST" modelAttribute="publisher" action="new">

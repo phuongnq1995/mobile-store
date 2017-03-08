@@ -14,12 +14,13 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	ProductRepository productRepository;
-
+	
+	@Transactional
 	public List<Product> findAll() {
 		return productRepository.findAll();
 	}
 
-	public String delete(int id) {
+	public String delete(Long id) {
 		if (productRepository.findOne(id) != null) {
 			productRepository.delete(id);
 			if (productRepository.findOne(id) != null)
@@ -39,8 +40,9 @@ public class ProductServiceImpl implements ProductService {
 		productRepository.save(product);
 		return "Save success !";
 	}
-
-	public Product findOne(int id) {
+	
+	@Transactional
+	public Product findOne(Long id) {
 		return productRepository.findOne(id);
 	}
 

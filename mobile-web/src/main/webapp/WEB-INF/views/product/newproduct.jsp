@@ -8,9 +8,19 @@
 	<div class="row-fluid">
 		<h3 class="center-block">New Product</h3>
 	</div>
+	<div class="row-fluid">
+		<br />
+		<c:if test="${ERROR_MESSAGE != null}">
+			<div class="col-sm-5 alert alert-danger">
+				<strong>${ERROR_MESSAGE}</strong>
+			</div>
+		</c:if>
+	</div>
 	<form:form method="POST" modelAttribute="product" action="new"
 		enctype="multipart/form-data">
 		<form:hidden path="id" />
+		<span class="error text-danger" style="color: red;"><form:errors
+				path="id" /></span>
 		<div class="form-group">
 			<label for="name" class="control-label col-sm-4">Name </label>
 			<div class="col-sm-8">
@@ -32,8 +42,8 @@
 		<div class="form-group">
 			<form:label path="publisher" class="control-label col-sm-2">Publisher </form:label>
 			<div class="col-sm-8">
-				<form:select path="publisher" items="${publisherList}"
-					itemValue="id" itemLabel="name" class="form-control" />
+				<form:select path="publisher" items="${publishers}" itemValue="id"
+					itemLabel="name" class="form-control" />
 			</div>
 			<span class="error text-danger" style="color: red;"><form:errors
 					path="publisher" /></span>
@@ -54,9 +64,8 @@
 				<div class="col-sm-8">
 					<form:input path="prices[${vs.index}].money" class="form-control"
 						type="number" placeholder="Input digist.." />
-
 				</div>
-				<span class="error text-danger" style="color: red;"><form:errors
+				<span class="error text-danger"><form:errors
 						path="prices[${vs.index}].money" /></span>
 			</c:forEach>
 		</div>
@@ -66,29 +75,26 @@
 				<form:input path="quantity" class="form-control" type="number" />
 			</div>
 			<span class="error text-danger" style="color: red;"><form:errors
-					path="quantity" placeholder="Input digist.." /></span>
+					path="quantity" /></span>
 		</div>
 		<div class="form-group">
 			<label for="images" class="control-label col-sm-2">Images </label>
+			<span class="error text-danger" style="color: red;"><form:errors
+					path="images" /></span>
 			<div class="col-sm-8">
-				<input type="file" name="fileUpload" size="50" accept="image/*"
-					class="form-control" />
+				<input type="file" name="fileUpload" size="50" accept="image/*" />
 			</div>
 			<div class="col-sm-8">
-				<input type="file" name="fileUpload" size="50" accept="image/*"
-					class="form-control" />
+				<input type="file" name="fileUpload" size="50" accept="image/*" />
 			</div>
 			<div class="col-sm-8">
-				<input type="file" name="fileUpload" size="50" accept="image/*"
-					class="form-control" />
+				<input type="file" name="fileUpload" size="50" accept="image/*" />
 			</div>
 			<div class="col-sm-8">
-				<input type="file" name="fileUpload" size="50" accept="image/*"
-					class="form-control" />
+				<input type="file" name="fileUpload" size="50" accept="image/*" />
 			</div>
 			<div class="col-sm-8">
-				<input type="file" name="fileUpload" size="50" accept="image/*"
-					class="form-control" />
+				<input type="file" name="fileUpload" size="50" accept="image/*" />
 			</div>
 		</div>
 		<div class="row-fluid">

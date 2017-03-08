@@ -10,17 +10,14 @@ import org.mobile.price.model.Price;
 import org.mobile.price.service.PriceService;
 import org.mobile.category.model.Category;
 import org.mobile.product.model.Product;
-import org.mobile.category.service.CategoryService;
 import org.mobile.product.service.ProductService;
 import org.mobile.publisher.model.Publisher;
-import org.mobile.publisher.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,12 +35,6 @@ public class AdminController {
 	private ProductService productService;
 
 	@Autowired
-	private CategoryService categoryService;
-
-	@Autowired
-	private PublisherService publisherService;
-
-	@Autowired
 	private PriceService priceService;
 
 	@InitBinder
@@ -52,37 +43,23 @@ public class AdminController {
 		binder.registerCustomEditor(Publisher.class, new PublisherEditor());
 	}
 
-	@ModelAttribute("categories")
-	public List<Category> populateCategories() {
-		ArrayList<Category> categories = new ArrayList<Category>();
-		categories.addAll(categoryService.findAll());
-		return categories;
-	}
-
-	@ModelAttribute("publisherList")
-	public List<Publisher> populatePublisherList() {
-		ArrayList<Publisher> publisherList = new ArrayList<Publisher>();
-		publisherList.addAll(publisherService.findAll());
-		return publisherList;
-	}
-
-	Product newProduct() {
+	public Product newProduct() {
 		Product product = new Product();
 		List<Price> prices = new ArrayList<Price>();
 		Price price = new Price();
-		price.setProductId(product.getId());
 		prices.add(price);
 		product.setPrices(prices);
+		System.out.println(product.getId());
 		return product;
 	}
-	
+
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	String showPage(Model model) {
 		List<Product> products = productService.findAll();
 		model.addAttribute("products", products);
 		return "product";
 	}
-	
+
 	@RequestMapping(value = "/product/new", method = RequestMethod.GET)
 	String newProduct(Model model) {
 		model.addAttribute("product", newProduct());
@@ -91,34 +68,33 @@ public class AdminController {
 
 	@RequestMapping(value = "/product/new", method = RequestMethod.POST)
 	String createProduct(RedirectAttributes redirectAttributes, @Valid Product product, BindingResult bindingResult,
-			@RequestParam("fileUpload") CommonsMultipartFile[] fileUpload) throws Exception {
-		if (bindingResult.hasErrors())
+			@RequestParam("fileUpload") CommonsMultipartFile[] fileUpload){
+		List<Image> images = new ArrayList<Image>();
+		for (CommonsMultipartFile aFile : fileUpload) {
+			if (!aFile.isEmpty()) {
+				Image image = new Image();
+				image.setData(aFile.getBytes());
+				image.setProduct(product);
+				images.add(image);
+			}
+		}
+		product.setImages(images);
+		if (bindingResult.hasErrors()) 
 			return "newproduct";
 		else {
-			List<Image> images = new ArrayList<Image>();
-			for (CommonsMultipartFile aFile : fileUpload) {
-				if (!aFile.isEmpty()) {
-					Image image = new Image();
-					image.setData(aFile.getBytes());
-					image.setProduct(product);
-					images.add(image);
-				}
-			}
-			product.setImages(images);
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", productService.save(product));
 		}
 		return "redirect:/admin/product";
 	}
 
 	@RequestMapping(value = "/product/info/{id}", method = RequestMethod.GET)
-	String editProduct(Model model, @PathVariable int id) {
+	String editProduct(Model model, @PathVariable Long id) {
 		model.addAttribute("product", productService.findOne(id));
 		return "editinfoproduct";
 	}
 
 	@RequestMapping(value = "product/info/update", method = RequestMethod.POST)
-	String updateProduct(RedirectAttributes redirectAttributes, @Valid Product product,
-			BindingResult bindingResult) {
+	String updateProduct(RedirectAttributes redirectAttributes, @Valid Product product, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "editinfoproduct";
 		else
@@ -127,7 +103,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/product/delete/{id}", method = RequestMethod.GET)
-	String deleteUser(@PathVariable int id, RedirectAttributes redirectAttributes) {
+	String deleteUser(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 		if (priceService.deleteByProductId(id) == "Delete success !")
 			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", productService.delete(id));
 		else

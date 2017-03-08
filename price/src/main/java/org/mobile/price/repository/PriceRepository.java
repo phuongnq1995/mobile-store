@@ -12,5 +12,5 @@ public interface PriceRepository extends JpaRepository<Price, Integer> {
 	@Modifying
 	@Transactional
 	@Query("delete from Price p where p.productId =:productId")
-	void deleteByProductId(@Param("productId") int productId);
+	void deleteByProductId(@Param("productId") Long productId);
 }

@@ -33,7 +33,7 @@
 		<div class="form-group">
 			<form:label path="publisher" class="control-label col-sm-2">Publisher :</form:label>
 			<div class="col-sm-5">
-				<form:select path="publisher" items="${publisherList}"
+				<form:select path="publisher" items="${publishers}"
 					itemValue="id" itemLabel="name" class="form-control" />
 			</div>
 			<span class="error text-danger" style="color: red;"><form:errors

@@ -79,4 +79,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/category/newcategory.jsp" />
 	</definition>
+
+	<definition name="order" extends="base-definition">
+		<put-attribute name="title" value="Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/order.jsp" />
+	</definition>
 </tiles-definitions>
