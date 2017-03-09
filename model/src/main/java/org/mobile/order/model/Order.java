@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -35,6 +36,7 @@ public class Order implements Serializable{
 	@OneToMany(cascade=CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name="order_id")
+	@Valid
 	private List<OrderDetails> listOrderDetails;
 
 	public Long getId() {
@@ -74,4 +76,12 @@ public class Order implements Serializable{
 		this.listOrderDetails = listOrderDetails;
 	}
 	public Order(){}
+	
+	public Long sumTotal(List<OrderDetails> listOrderDetails){
+		long sum = 0;
+		for (OrderDetails orderDetails : listOrderDetails) {
+			sum += (orderDetails.getPrice() * orderDetails.getQuantity());
+		}
+		return sum;
+	}
 }

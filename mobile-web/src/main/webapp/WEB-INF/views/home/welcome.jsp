@@ -71,7 +71,7 @@
 						<p>${product.description}</p>
 						<h4 style="text-align: center">
 							<a class="btn" href="#"><i class="fa fa-search-plus"
-								style="font-size: 20px"></i></a> <a class="btn" href="cart/addProductToCart/${product.id}"
+								style="font-size: 20px"></i></a> <a class="btn" href="${pageContext.request.contextPath}/cart/addProductToCart/${product.id}"
 								style="font-size: 15px">Add to <i
 								class="fa fa-shopping-cart" style="font-size: 20px"></i></a> <a
 								class="btn btn-primary" href="#">$${product.getCurrentPrice().money}.00

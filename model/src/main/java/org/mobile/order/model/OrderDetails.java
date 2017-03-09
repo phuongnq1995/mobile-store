@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.mobile.product.model.Product;
@@ -24,17 +26,19 @@ public class OrderDetails implements Serializable{
 	private Long id;
 	
 	@Column
+	@Min(1)@Max(10)
 	private int quantity;
 	
 	@Column(name="order_id", nullable=true)
-	@NotNull
 	private Long orderId;
 	
 	@ManyToOne
 	@JoinColumn(name="product_id")
+	@NotNull
 	private Product product;
 	
 	@Column
+	@Min(0)
 	private Long price;
 
 	public Long getId() {
@@ -83,6 +87,6 @@ public class OrderDetails implements Serializable{
 		this.product = product;
 		this.price = price;
 	}
-	
+	public OrderDetails(){}
 	
 }
