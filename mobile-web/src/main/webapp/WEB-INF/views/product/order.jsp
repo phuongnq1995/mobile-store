@@ -10,8 +10,8 @@
 			<li class="active">SHOPPING CART</li>
 		</ul>
 		<h3>
-			SHOPPING CART [ <small>${order.getListOrderDetails().size()} Item(s) </small>]<a href="products.html"
-				class="btn btn-large pull-right"><i
+			SHOPPING CART [ <small>${order.getListOrderDetails().size()}
+				Item(s) </small>]<a href="products.html" class="btn btn-large pull-right"><i
 				class="fa fa-long-arrow-left"></i> Continue Shopping </a>
 		</h3>
 		<hr class="soft" />
@@ -41,14 +41,20 @@
 								<form:input path="listOrderDetails[${vs.index}].quantity"
 									type="number" placeholder="1" class="span1"
 									style="max-width: 34px" min="1" />
+								<form:errors path="listOrderDetails[${vs.index}].quantity" />
+								<form:errors path="listOrderDetails[${vs.index}].cartId" />
+								<form:errors path="listOrderDetails[${vs.index}].product" />
+								<form:errors path="listOrderDetails[${vs.index}].price" />
 								<button class="btn" type="button">
 									<i class="fa fa-minus"></i>
 								</button>
 								<button class="btn" type="button">
 									<i class="fa fa-plus"></i>
 								</button>
-								<a href="${pageContext.request.contextPath}/cart/remove/${vs.index}" class="btn btn-danger" type="button">
-									<i class="fa fa-remove"></i>
+								<a
+									href="${pageContext.request.contextPath}/cart/remove/${vs.index}"
+									class="btn btn-danger" type="button"> <i
+									class="fa fa-remove"></i>
 								</a>
 							</div>
 						</td>

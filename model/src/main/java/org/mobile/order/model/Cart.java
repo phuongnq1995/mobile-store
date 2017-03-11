@@ -2,7 +2,6 @@ package org.mobile.order.model;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,16 +9,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
-
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.mobile.user.model.User;
 
 @Entity
-@Table(name="order")
-public class Order implements Serializable{
+@Table(name="cart")
+public class Cart implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -27,15 +27,16 @@ public class Order implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable=true)
-	private String email;
+	@ManyToOne
+	@JoinColumn(name="email")
+	private User user;
 	
 	@Column
 	private Long total;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinColumn(name="order_id")
+	@JoinColumn(name="cart_id")
 	@Valid
 	private List<OrderDetails> listOrderDetails;
 
@@ -47,12 +48,12 @@ public class Order implements Serializable{
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public User getUser() {
+		return user;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Long getTotal() {
@@ -71,11 +72,11 @@ public class Order implements Serializable{
 		this.listOrderDetails = listOrderDetails;
 	}
 
-	public Order(Long total, List<OrderDetails> listOrderDetails) {
+	public Cart(Long total, List<OrderDetails> listOrderDetails) {
 		this.total = total;
 		this.listOrderDetails = listOrderDetails;
 	}
-	public Order(){}
+	public Cart(){}
 	
 	public Long sumTotal(List<OrderDetails> listOrderDetails){
 		long sum = 0;

@@ -1,8 +1,8 @@
 package org.mobile.product.repository;
 
-import org.mobile.order.model.Order;
+import org.mobile.order.model.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepository extends JpaRepository<Order, Long>{
+public interface CartRepository extends JpaRepository<Cart, Long>{
 	
 }

@@ -93,7 +93,7 @@
 				Weight 0.341kg (excluding battery and memory card). Weight 0.437kg
 				(including battery and memory card).</p>
 			<a class="btn btn-small pull-right" href="#detail">More Details</a> <br
-				class="clr" /> <a href="#" name="detail"></a>
+				class="clr" /> <a href="#" ></a>
 			<hr class="soft" />
 		</div>
 

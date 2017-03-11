@@ -29,8 +29,8 @@ public class OrderDetails implements Serializable{
 	@Min(1)@Max(10)
 	private int quantity;
 	
-	@Column(name="order_id", nullable=true)
-	private Long orderId;
+	@Column(name="cart_id", nullable=true)
+	private Long cartId;
 	
 	@ManyToOne
 	@JoinColumn(name="product_id")
@@ -65,12 +65,12 @@ public class OrderDetails implements Serializable{
 		this.price = price;
 	}
 
-	public Long getOrderId() {
-		return orderId;
+	public Long getCartId() {
+		return cartId;
 	}
 
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
+	public void setCartId(Long cartId) {
+		this.cartId = cartId;
 	}
 
 	public Product getProduct() {
@@ -81,9 +81,9 @@ public class OrderDetails implements Serializable{
 		this.product = product;
 	}
 
-	public OrderDetails(int quantity, Long orderId, Product product, Long price) {
+	public OrderDetails(int quantity, Long cartId, Product product, Long price) {
 		this.quantity = quantity;
-		this.orderId = orderId;
+		this.cartId = cartId;
 		this.product = product;
 		this.price = price;
 	}
