@@ -1,5 +1,6 @@
 package org.mobile.controller.product;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -68,9 +70,9 @@ public class AdminController {
 
 	@RequestMapping(value = "/product/new", method = RequestMethod.POST)
 	String createProduct(RedirectAttributes redirectAttributes, @Valid Product product, BindingResult bindingResult,
-			@RequestParam("fileUpload") CommonsMultipartFile[] fileUpload){
+			@RequestParam("fileUpload") MultipartFile[] fileUpload) throws IOException{
 		List<Image> images = new ArrayList<Image>();
-		for (CommonsMultipartFile aFile : fileUpload) {
+		for (MultipartFile aFile : fileUpload) {
 			if (!aFile.isEmpty()) {
 				Image image = new Image();
 				image.setData(aFile.getBytes());

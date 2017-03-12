@@ -10,9 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 @Entity
 @Table(name="role")
 public class Role{
@@ -25,7 +22,6 @@ public class Role{
 	private String name;
 	
 	@ManyToMany(mappedBy="roles")
-	@LazyCollection(LazyCollectionOption.TRUE)
 	private Set<User> users;
 
 	public int getId() {

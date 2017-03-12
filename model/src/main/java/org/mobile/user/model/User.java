@@ -3,7 +3,6 @@ package org.mobile.user.model;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import javax.validation.constraints.Size;
+
 import org.mobile.order.model.Cart;
 
 @Entity
@@ -27,17 +26,19 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@NotNull
+	@Size(min=8, max=55)
 	private String email;
 
 	@Column
+	@Size(min=6, max=125)
 	private String password;
 
 	@Transient
+	@Size(min=6, max=125)
 	private String passwordConfirm;
 
 	@Column(name = "fullname")
-	@NotNull
+	@Size(min=5, max=125)
 	private String fullName;
 
 	@Column
@@ -53,11 +54,11 @@ public class User implements Serializable{
 	private String city;
 	
 	@Column
+	@Size(min=3, max=125)
 	private String phone;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "email"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<Role> roles;
 	
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL, fetch = FetchType.EAGER)

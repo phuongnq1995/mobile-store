@@ -63,7 +63,7 @@ public class OrderController {
 		session.setAttribute("cart", cart);
 		return "redirect:/cart/showCart";
 	}
-	
+
 	@RequestMapping(value = "/showCart", method = RequestMethod.GET)
 	public String showCart(HttpSession session, Model model) {
 		Cart cart = checkCart(session);
@@ -72,7 +72,8 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String updateCart(HttpSession session, @ModelAttribute("order") @Valid Cart order, BindingResult bindingResult, Model model) {
+	public String updateCart(HttpSession session, @ModelAttribute("order") @Valid Cart order,
+			BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			return "order";
 		}
@@ -80,32 +81,34 @@ public class OrderController {
 		session.setAttribute("cart", order);
 		return "redirect:/cart/orderaddress";
 	}
-	
-	@RequestMapping(value="/orderaddress", method = RequestMethod.GET)
-	public String getUser(Model model){
+
+	@RequestMapping(value = "/orderaddress", method = RequestMethod.GET)
+	public String getUser(Model model) {
 		model.addAttribute("user", new User());
 		return "orderaddress";
 	}
 
 	@RequestMapping(value = "/orderaddress", method = RequestMethod.POST)
 	public String orderCart(RedirectAttributes redirectAttributes, HttpSession session, @Valid User user,
-			BindingResult bindingResult)throws Exception {
+			BindingResult bindingResult) throws Exception {
 		Cart cart = (Cart) session.getAttribute("cart");
-		System.out.println("cart :"+ cart.getTotal());
-		
+		System.out.println("cart :" + cart.getTotal());
 		if (cart.getListOrderDetails().isEmpty()) {
 			return "redirect:/";
+		}
+		if (!userService.findUser(user.getEmail()).getPassword().isEmpty()) {
+			bindingResult.reject("email", "Duplicate.userForm.email");
 		}
 		if (bindingResult.hasErrors()) {
 			return "orderaddress";
 		}
-			ArrayList<Cart> orders = new ArrayList<Cart>();
-			cart.setUser(user);
-			orders.add(cart);
-			user.setCarts(orders);
-			userService.save(user);
-			cart = null;
-			session.setAttribute("cart", cart);
+		ArrayList<Cart> orders = new ArrayList<Cart>();
+		cart.setUser(user);
+		orders.add(cart);
+		user.setCarts(orders);
+		userService.insert(user);
+		cart = null;
+		session.setAttribute("cart", cart);
 		return "redirect:/";
 	}
 }

@@ -16,7 +16,7 @@
 			</div>
 		</c:if>
 	</div>
-	<form:form method="POST" modelAttribute="product" action="new"
+	<form:form method="POST" modelAttribute="product" action="new?${_csrf.parameterName}=${_csrf.token}"
 		enctype="multipart/form-data">
 		<form:hidden path="id" />
 		<span class="error text-danger" style="color: red;"><form:errors
@@ -78,8 +78,8 @@
 					path="quantity" /></span>
 		</div>
 		<div class="form-group">
-			<label for="images" class="control-label col-sm-2">Images </label>
-			<span class="error text-danger" style="color: red;"><form:errors
+			<label for="images" class="control-label col-sm-2">Images </label> <span
+				class="error text-danger" style="color: red;"><form:errors
 					path="images" /></span>
 			<div class="col-sm-8">
 				<input type="file" name="fileUpload" size="50" accept="image/*" />

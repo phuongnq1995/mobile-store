@@ -4,5 +4,9 @@ import org.mobile.user.model.User;
 
 public interface UserService {
 
-	String save(User user);
+	String insert(User user);
+	
+	User findUser(String name);
+	
+	void save(User user);
 }
