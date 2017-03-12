@@ -36,7 +36,12 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(user);
 	}
 
-	public User findUser(String name) {
-		return userRepository.findOne(name);
+	public User findUser(String email) {
+		return userRepository.findOne(email);
 	}
+
+	public boolean findUserPresent(String email) {
+		return userRepository.findUserPresent(email);
+	}
+
 }

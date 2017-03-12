@@ -14,9 +14,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.mobile.order.model.Cart;
 
 @Entity
@@ -42,15 +42,15 @@ public class User implements Serializable{
 	private String fullName;
 
 	@Column
-	@NotNull
+	@NotEmpty
 	private String street;
 	
 	@Column
-	@NotNull
+	@NotEmpty
 	private String state;
 	
 	@Column
-	@NotNull
+	@NotEmpty
 	private String city;
 	
 	@Column

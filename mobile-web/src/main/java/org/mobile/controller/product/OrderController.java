@@ -1,5 +1,6 @@
 package org.mobile.controller.product;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -12,6 +13,7 @@ import org.mobile.user.model.User;
 import org.mobile.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,17 +45,25 @@ public class OrderController {
 		return cart;
 	}
 
+	@Transactional
 	@RequestMapping(value = "/addProductToCart/{id}", method = RequestMethod.GET)
 	public String addProductToCart(@PathVariable Long id, HttpSession session) throws Exception {
 		Product product = productService.findOne(id);
 		Cart cart = checkCart(session);
+		for (OrderDetails orderDetails : cart.getListOrderDetails()) {
+			if (orderDetails.getProduct().getId() == id) {
+				orderDetails.setQuantity(orderDetails.getQuantity() + 1);
+				return "redirect:/cart/showCart";
+			}
+		}
 		OrderDetails orderDetails = new OrderDetails(1, cart.getId(), product, product.getCurrentPrice().getMoney());
 		cart.getListOrderDetails().add(orderDetails);
 		cart.setTotal(cart.sumTotal(cart.getListOrderDetails()));
 		session.setAttribute("cart", cart);
-		return "redirect:/";
+		return "redirect:/cart/showCart";
 	}
 
+	@Transactional
 	@RequestMapping(value = "/remove/{index}", method = RequestMethod.GET)
 	public String removeFormCart(@PathVariable int index, HttpSession session) {
 		Cart cart = checkCart(session);
@@ -71,15 +81,30 @@ public class OrderController {
 		return "order";
 	}
 
+	@Transactional
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String updateCart(HttpSession session, @ModelAttribute("order") @Valid Cart order,
-			BindingResult bindingResult, Model model) {
+			BindingResult bindingResult, Model model, Principal principal) {
 		if (bindingResult.hasErrors()) {
 			return "order";
 		}
 		order.setTotal(order.sumTotal(order.getListOrderDetails()));
 		session.setAttribute("cart", order);
-		return "redirect:/cart/orderaddress";
+		if (principal == null) {
+			return "redirect:/cart/orderaddress";
+		} else {
+			User user = userService.findUser(principal.getName());
+			ArrayList<Cart> orders = new ArrayList<Cart>();
+			order.setUser(user);
+			orders.add(order);
+			user.setCarts(orders);
+			userService.insert(user);
+			model.addAttribute("user", user);
+			model.addAttribute("cart", order);
+			order = null;
+			session.setAttribute("cart", order);
+			return "orderdetails";
+		}
 	}
 
 	@RequestMapping(value = "/orderaddress", method = RequestMethod.GET)
@@ -88,16 +113,17 @@ public class OrderController {
 		return "orderaddress";
 	}
 
+	@Transactional
 	@RequestMapping(value = "/orderaddress", method = RequestMethod.POST)
 	public String orderCart(RedirectAttributes redirectAttributes, HttpSession session, @Valid User user,
-			BindingResult bindingResult) throws Exception {
+			BindingResult bindingResult, Model model) throws Exception {
 		Cart cart = (Cart) session.getAttribute("cart");
-		System.out.println("cart :" + cart.getTotal());
-		if (cart.getListOrderDetails().isEmpty()) {
+		if (cart == null || cart.getListOrderDetails().isEmpty()) {
 			return "redirect:/";
 		}
-		if (!userService.findUser(user.getEmail()).getPassword().isEmpty()) {
-			bindingResult.reject("email", "Duplicate.userForm.email");
+		if (userService.findUserPresent(user.getEmail())) {
+			bindingResult.reject("email", "Duplicate.email");
+			System.out.println("here");
 		}
 		if (bindingResult.hasErrors()) {
 			return "orderaddress";
@@ -107,8 +133,11 @@ public class OrderController {
 		orders.add(cart);
 		user.setCarts(orders);
 		userService.insert(user);
+		model.addAttribute("user", user);
+		model.addAttribute("order", cart);
 		cart = null;
 		session.setAttribute("cart", cart);
-		return "redirect:/";
+		return "orderdetails";
 	}
+
 }

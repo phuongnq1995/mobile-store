@@ -86,13 +86,20 @@
 	</definition>
 
 	<definition name="registration" extends="base-definition">
-		<put-attribute name="title" value="Login" />
-		<put-attribute name="body" value="/WEB-INF/views/user/registration.jsp" />
+		<put-attribute name="title" value="Register" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/registration.jsp" />
 	</definition>
 
 	<definition name="orderaddress" extends="base-definition">
 		<put-attribute name="title" value="Order" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/user/orderaddress.jsp" />
+	</definition>
+
+	<definition name="orderdetails" extends="base-definition">
+		<put-attribute name="title" value="Order Details" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/orderdetails.jsp" />
 	</definition>
 </tiles-definitions>

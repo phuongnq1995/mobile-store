@@ -17,5 +17,9 @@ public class CartServiceImpl implements CartService{
 		orderRepository.save(order);
 		return "Save success !";
 	}
+
+	public Cart findOne(long id) {
+		return orderRepository.findOne(id);
+	}
 	
 }

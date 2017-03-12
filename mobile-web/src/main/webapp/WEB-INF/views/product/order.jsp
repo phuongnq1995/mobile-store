@@ -42,9 +42,6 @@
 									type="number" placeholder="1" class="span1"
 									style="max-width: 34px" min="1" />
 								<form:errors path="listOrderDetails[${vs.index}].quantity" />
-								<form:errors path="listOrderDetails[${vs.index}].cartId" />
-								<form:errors path="listOrderDetails[${vs.index}].product" />
-								<form:errors path="listOrderDetails[${vs.index}].price" />
 								<button class="btn" type="button">
 									<i class="fa fa-minus"></i>
 								</button>
@@ -72,7 +69,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<a href="products.html" class="btn btn-large"><i
+		<a href="${pageContext.request.contextPath}/" class="btn btn-large"><i
 			class="fa fa-long-arrow-left"></i> Continue Shopping </a>
 		<input type="submit" value="Next"
 			class="btn btn-large pull-right btn-success" type="button">

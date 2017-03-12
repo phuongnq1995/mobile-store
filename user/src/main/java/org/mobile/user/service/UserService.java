@@ -9,4 +9,7 @@ public interface UserService {
 	User findUser(String name);
 	
 	void save(User user);
+
+	boolean findUserPresent(String email);
+	
 }

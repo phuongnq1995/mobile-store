@@ -54,4 +54,8 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findByPublisherId(publisher_id);
 	}
 
+	public List<Product> findTop4() {
+		return productRepository.findLast4Products();
+	}
+
 }

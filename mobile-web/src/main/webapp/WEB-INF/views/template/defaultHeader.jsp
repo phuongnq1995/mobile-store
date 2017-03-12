@@ -54,13 +54,14 @@
 				<li class=""><a href="contact.html">Contact</a></li>
 				<li class=""><c:choose>
 						<c:when test="${pageContext.request.userPrincipal.name != null}">
+							
+							<a onclick="document.forms['logoutForm'].submit()" role="button"
+								style="padding-right: 0"><span
+								class="btn btn-large btn-warning">Log out</span></a>
 							<form id="logoutForm" method="POST" action="logout">
 								<input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
 							</form>
-							<a onclick="document.forms['logoutForm'].submit()" role="button"
-								style="padding-right: 0"><span
-								class="btn btn-large btn-warning">Log out</span></a>
 						</c:when>
 						<c:otherwise>
 							<a href="#login" role="button" data-toggle="modal"
@@ -75,24 +76,26 @@
 									<h3>Login Block</h3>
 								</div>
 								<div class="modal-body">
-									<!-- 									<form class="form-horizontal loginFrm">
-										<div class="control-group">
-											<input type="text" id="inputEmail" placeholder="Email">
-										</div>
-										<div class="control-group">
-											<input type="password" id="inputPassword"
-												placeholder="Password">
-										</div>
-									</form> -->
-									<form method="POST" action="${pageContext.request.contextPath}/login"
+									<form method="POST"
+										action="${pageContext.request.contextPath}/login"
 										class="form-horizontal loginFrm">
-										<div class="form-group ${error != null ? 'has-error' : ''}">
-											<span>${message}</span> <input name="email" type="text"
-												class="form-control" placeholder="email" autofocus="autofocus"/>
-											<input name="password" type="password" class="form-control"
-												placeholder="Password" /> <span>${error}</span> <input
-												type="hidden" name="${_csrf.parameterName}"
-												value="${_csrf.token}" />
+										<div class="${error != null ? 'has-error' : ''}">
+
+											<div class="control-group">
+												<input name="email" type="text" placeholder="email"
+													autofocus="autofocus" />
+											</div>
+											<div class="control-group">
+												<span>${message}</span> <span>${error}</span>
+											</div>
+											<div class="control-group">
+												<input name="password" type="password"
+													placeholder="Password" />
+											</div>
+											<div class="control-group">
+												<input type="hidden" name="${_csrf.parameterName}"
+													value="${_csrf.token}" />
+											</div>
 
 											<button class="btn btn-lg btn-primary btn-block"
 												type="submit">Log In</button>

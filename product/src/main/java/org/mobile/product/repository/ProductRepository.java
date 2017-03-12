@@ -12,8 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ProductRepository extends JpaRepository<Product, Long>{
 	
 	@Query("select p from Product p where p.category.id = :categoryId")
-	List<Product> findByCategoryId(@Param("categoryId") int category_id);
+	public List<Product> findByCategoryId(@Param("categoryId") int category_id);
 	
 	@Query("select p from Product p where p.publisher.id = :publisherId")
-	List<Product> findByPublisherId(@Param("publisherId") int publisher_id);
+	public List<Product> findByPublisherId(@Param("publisherId") int publisher_id);
+	
+	@Query(value="SELECT * FROM product ORDER BY id DESC LIMIT 4", nativeQuery = true)
+	public List<Product> findLast4Products();
 }

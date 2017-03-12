@@ -19,7 +19,7 @@ public class HomeController {
 	
 	@ModelAttribute("productList")
 	public List<Product> showCarousel() {
-		return productService.findAll();
+		return productService.findTop4();
 	}
 	
 	@RequestMapping(value = "/", method=RequestMethod.GET)

@@ -8,6 +8,7 @@ public interface ProductService {
 	List<Product> findAll();
 	
 	String delete(Long id);
+	
 	String save(Product product);
 	
 	Product findOne(Long id);
@@ -15,4 +16,6 @@ public interface ProductService {
 	List<Product> findByCategoryId(int category_id);
 
 	List<Product> findByPublisherId(int publisher_id);
+	
+	List<Product> findTop4();
 }
