@@ -122,8 +122,7 @@ public class OrderController {
 			return "redirect:/";
 		}
 		if (userService.findUserPresent(user.getEmail())) {
-			bindingResult.reject("email", "Duplicate.email");
-			System.out.println("here");
+			bindingResult.rejectValue("email", "Duplicate.email");
 		}
 		if (bindingResult.hasErrors()) {
 			return "orderaddress";

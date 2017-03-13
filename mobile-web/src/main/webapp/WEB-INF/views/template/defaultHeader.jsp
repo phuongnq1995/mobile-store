@@ -17,12 +17,7 @@
 		</c:choose>
 		<div class="span6">
 			<div class="pull-right">
-				<span class="btn btn-mini">En</span> <span class="btn btn-mini">$155.00</span>
-				<a href="product_summary.html"><span
-					class="btn btn-mini btn-primary"> <i
-						class="fa fa-shopping-cart" style="font-size: 16px; color: white"></i>
-						[ 3 ] Itemes in your cart
-				</span> </a>
+				<span class="btn btn-mini">En</span> 
 			</div>
 		</div>
 	</div>
@@ -35,26 +30,17 @@
 		<div class="navbar-inner">
 			<a class="brand" href="${pageContext.request.contextPath}/"><img
 				src="<c:url value="/resources/images/logo.png"/>" alt="Bootsshop" /></a>
-			<form class="form-inline navbar-search" method="post"
-				action="products.html">
-				<input id="srchFld" class="srchTxt" type="text" /> <select
-					class="srchTxt">
-					<option>All</option>
-					<option>CLOTHES</option>
-					<option>FOOD AND BEVERAGES</option>
-					<option>HEALTH & BEAUTY</option>
-					<option>SPORTS & LEISURE</option>
-					<option>BOOKS & ENTERTAINMENTS</option>
-				</select>
+			<form class="form-inline navbar-search" method="get"
+				action="${pageContext.request.contextPath}/searchProduct">
+				<input id="srchFld" class="form-control" type="text" name="key"
+					placeholder="Search..." />
 				<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 			</form>
 			<ul id="topMenu" class="nav pull-right">
-				<li class=""><a href="special_offer.html">Specials Offer</a></li>
-				<li class=""><a href="normal.html">Delivery</a></li>
-				<li class=""><a href="contact.html">Contact</a></li>
+				<li class=""><a href="${pageContext.request.contextPath}/specialoffer">Specials Offer</a></li>
+				<li class=""><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
 				<li class=""><c:choose>
 						<c:when test="${pageContext.request.userPrincipal.name != null}">
-							
 							<a onclick="document.forms['logoutForm'].submit()" role="button"
 								style="padding-right: 0"><span
 								class="btn btn-large btn-warning">Log out</span></a>
@@ -77,35 +63,31 @@
 								</div>
 								<div class="modal-body">
 									<form method="POST"
-										action="${pageContext.request.contextPath}/login"
-										class="form-horizontal loginFrm">
-										<div class="${error != null ? 'has-error' : ''}">
-
-											<div class="control-group">
-												<input name="email" type="text" placeholder="email"
-													autofocus="autofocus" />
-											</div>
-											<div class="control-group">
-												<span>${message}</span> <span>${error}</span>
-											</div>
-											<div class="control-group">
-												<input name="password" type="password"
-													placeholder="Password" />
-											</div>
-											<div class="control-group">
-												<input type="hidden" name="${_csrf.parameterName}"
-													value="${_csrf.token}" />
-											</div>
-
-											<button class="btn btn-lg btn-primary btn-block"
-												type="submit">Log In</button>
-											<h4 class="text-center">
-												<a href="registration">Create an account</a>
-											</h4>
+										action="${pageContext.request.contextPath}/login">
+										<div class="form-group">
+											<label for="email">Email:</label> <input name="email"
+												type="email" placeholder="Email" class="form-control"
+												id="email" />
 										</div>
+										<div class="form-group">
+											<span>${message}</span> <span>${error}</span>
+										</div>
+										<div class="form-group">
+											<label for="password">Password:</label> <input
+												name="password" type="password" placeholder="Password"
+												class="form-control" id="password" />
+										</div>
+										<div class="form-group">
+											<input type="hidden" name="${_csrf.parameterName}"
+												value="${_csrf.token}" class="form-control" />
+										</div>
+										<button class="btn btn-lg btn-primary" type="submit">Sign
+											In</button>
+										<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 									</form>
-									<button type="submit" class="btn btn-success">Sign in</button>
-									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+									<h4 class="text-center">
+										<a href="registration">Create an account</a>
+									</h4>
 								</div>
 							</div>
 						</c:otherwise>

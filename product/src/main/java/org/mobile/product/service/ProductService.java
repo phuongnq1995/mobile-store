@@ -18,4 +18,6 @@ public interface ProductService {
 	List<Product> findByPublisherId(int publisher_id);
 	
 	List<Product> findTop4();
+
+	List<Product> findProductsByKeyWord(String key);
 }

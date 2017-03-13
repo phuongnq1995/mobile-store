@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 @Controller
@@ -20,6 +21,23 @@ public class HomeController {
 	@ModelAttribute("productList")
 	public List<Product> showCarousel() {
 		return productService.findTop4();
+	}
+	
+	@RequestMapping(value = "/contact")
+	public String contact(){
+		return "contact";
+	}
+	
+	@RequestMapping(value = "/specialoffer")
+	public String specialOffer(Model model){
+		model.addAttribute("searchProducts", productService.findAll());
+		return "specialoffer";
+	}
+	
+	@RequestMapping(value = "/searchProduct", method = RequestMethod.GET)
+	public String searchProducts(@RequestParam("key") String key, Model model){
+		model.addAttribute("searchProducts", productService.findProductsByKeyWord(key));
+		return "welcome";
 	}
 	
 	@RequestMapping(value = "/", method=RequestMethod.GET)

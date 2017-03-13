@@ -11,23 +11,24 @@
 	</ul>
 	<h3>Registration</h3>
 	<div class="well">
-		<form:form method="POST" modelAttribute="userForm"
+		<form:form method="POST" modelAttribute="user"
 			class="form-horizontal">
 			<h4>Your personal information</h4>
 			<div class="control-group">
 				<label class="control-label" for="inputFname1">Full name <sup>*</sup></label>
 				<div class="controls">
-					<form:input path="fullName" placeholder="Full Name"
-						autofocus="true" />
-					<form:errors path="fullName"></form:errors>
+					<form:input path="fullName" placeholder="Full Name"/>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="fullName"></form:errors></span>
 				</div>
 			</div>
 			<spring:bind path="email">
 				<div class="control-group ${status.error ? 'has-error' : ''}">
 					<label class="control-label" for="email">Email <sup>*</sup></label>
 					<div class="controls">
-						<form:input type="text" path="email" placeholder="Email" />
-						<form:errors path="email"></form:errors>
+						<form:input type="email" path="email" placeholder="Email" />
+						<span class="error text-danger" style="color: red;"><form:errors
+								path="email"></form:errors></span>
 					</div>
 				</div>
 			</spring:bind>
@@ -35,8 +36,9 @@
 				<div class="control-group ${status.error ? 'has-error' : ''}">
 					<label class="control-label" for="password">Password <sup>*</sup></label>
 					<div class="controls">
-						<form:input type="text" path="password" placeholder="Password" />
-						<form:errors path="password"></form:errors>
+						<form:input type="password" path="password" placeholder="Password" />
+						<span class="error text-danger" style="color: red;"><form:errors
+								path="password"></form:errors></span>
 					</div>
 				</div>
 			</spring:bind>
@@ -46,9 +48,10 @@
 						Confirm<sup>*</sup>
 					</label>
 					<div class="controls">
-						<form:input type="text" path="passwordConfirm"
+						<form:input type="password" path="passwordConfirm"
 							placeholder="Confirm your password" />
-						<form:errors path="passwordConfirm"></form:errors>
+						<span class="error text-danger" style="color: red;"><form:errors
+								path="passwordConfirm"></form:errors></span>
 					</div>
 				</div>
 			</spring:bind>
@@ -56,31 +59,35 @@
 			<div class="control-group">
 				<label class="control-label" for="street">Address<sup>*</sup></label>
 				<div class="controls">
-					<form:input type="text" path="street" placeholder="Street" />
-					<form:errors path="street"></form:errors>
-					<span>Street address, P.O. box, company name, c/o</span>
+					<form:input type="text" path="street"
+						placeholder="Street, Company.." />
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="street"></form:errors></span>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="city">City<sup>*</sup></label>
 				<div class="controls">
 					<form:input type="text" path="city" placeholder="City" />
-					<form:errors path="city"></form:errors>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="city"></form:errors></span>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="state">State<sup>*</sup></label>
 				<div class="controls">
 					<form:input type="text" path="state" placeholder="State" />
-					<form:errors path="state"></form:errors>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="state"></form:errors></span>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="phone">Phone number</label>
+				<label class="control-label" for="phone">Phone number*</label>
 				<div class="controls">
 					<form:input type="text" path="phone" id="mobile"
 						placeholder="Mobile Phone" />
-					<form:errors path="phone"></form:errors>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="phone"></form:errors></span>
 				</div>
 			</div>
 			<p>

@@ -2,11 +2,23 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <div class="span9">
+	<div class="row-fluid">
+		<br />
+		<c:if test="${SUCCESS_MESSAGE != null}">
+			<div class="col-sm-5 alert alert-success">
+				<strong>${SUCCESS_MESSAGE}</strong>
+			</div>
+		</c:if>
+		<c:if test="${ERROR_MESSAGE != null}">
+			<div class="col-sm-5 alert alert-danger">
+				<strong>${ERROR_MESSAGE}</strong>
+			</div>
+		</c:if>
+	</div>
 	<div class="well well-small">
 		<c:if test="${not empty productList}">
 			<h4>
-				Featured Products <small class="pull-right"> new
-					products</small>
+				Featured Products <small class="pull-right"> new products</small>
 			</h4>
 			<div class="row-fluid">
 				<div id="featured" class="carousel slide">

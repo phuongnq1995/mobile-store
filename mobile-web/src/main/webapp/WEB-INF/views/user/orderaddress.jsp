@@ -23,7 +23,7 @@
 			<div class="control-group">
 				<label class="control-label" for="email">Email <sup>*</sup></label>
 				<div class="controls">
-					<form:input type="text" path="email" placeholder="Email" />
+					<form:input type="email" path="email" placeholder="Email" />
 					<span class="error text-danger" style="color: red;"><form:errors path="email" /></span>
 				</div>
 			</div>

@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
-
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mobile.order.model.Cart;
 
@@ -27,6 +27,7 @@ public class User implements Serializable{
 
 	@Id
 	@Size(min=8, max=55)
+	@Email
 	private String email;
 
 	@Column

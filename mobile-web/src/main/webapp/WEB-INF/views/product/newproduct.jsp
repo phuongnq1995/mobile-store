@@ -16,7 +16,8 @@
 			</div>
 		</c:if>
 	</div>
-	<form:form method="POST" modelAttribute="product" action="new?${_csrf.parameterName}=${_csrf.token}"
+	<form:form method="POST" modelAttribute="product"
+		action="new?${_csrf.parameterName}=${_csrf.token}"
 		enctype="multipart/form-data">
 		<form:hidden path="id" />
 		<span class="error text-danger" style="color: red;"><form:errors
@@ -65,7 +66,7 @@
 					<form:input path="prices[${vs.index}].money" class="form-control"
 						type="number" placeholder="Input digist.." />
 				</div>
-				<span class="error text-danger"><form:errors
+				<span class="error text-danger" style="color: red;"><form:errors
 						path="prices[${vs.index}].money" /></span>
 			</c:forEach>
 		</div>
@@ -77,26 +78,17 @@
 			<span class="error text-danger" style="color: red;"><form:errors
 					path="quantity" /></span>
 		</div>
-		<div class="form-group">
-			<label for="images" class="control-label col-sm-2">Images </label> <span
-				class="error text-danger" style="color: red;"><form:errors
-					path="images" /></span>
-			<div class="col-sm-8">
-				<input type="file" name="fileUpload" size="50" accept="image/*" />
-			</div>
-			<div class="col-sm-8">
-				<input type="file" name="fileUpload" size="50" accept="image/*" />
-			</div>
-			<div class="col-sm-8">
-				<input type="file" name="fileUpload" size="50" accept="image/*" />
-			</div>
-			<div class="col-sm-8">
-				<input type="file" name="fileUpload" size="50" accept="image/*" />
-			</div>
-			<div class="col-sm-8">
-				<input type="file" name="fileUpload" size="50" accept="image/*" />
-			</div>
+		<div class="row-fluid">
+			<p>
+				Images(Min = 1, Max = 5) <a type="button" id='addPlayer'
+					class="btn btn-normal btn-default">+</a><a type="button"
+					id='removePlayer' class="btn btn-normal btn-default">-</a>
 		</div>
+		<span class="error text-danger" style="color: red;"><form:errors
+				path="images" /></span>
+		<div id="input-player-list"></div>
+		<input id="a-player1" type='file' name='fileUpload' accept="image/*">
+		<br>
 		<div class="row-fluid">
 			<div class="col-sm-6">
 				<input type="submit" value="Save" class="btn btn-success"
@@ -109,3 +101,35 @@
 		</div>
 	</form:form>
 </div>
+<script>
+	document.getElementById('addPlayer').onclick = function createInputField() {
+		var numItems = $('input[name*="fileUpload"]').length;
+		if (numItems < 5) {
+			var input = document.createElement('input');
+			var lineBreak = document.createElement('br');
+			var testId = "player";
+			var i = 0;
+			var x = document.getElementsByTagName('INPUT').length - 2;
+			for (i = 0; i < x; i++) {
+				i;
+			}
+			input.setAttribute('id', testId + i);
+			input.type = 'file';
+			input.name = 'fileUpload[]';
+			input.accept = 'image/*';
+			var aplayer1 = document.getElementById('input-player-list');
+			aplayer1.appendChild(input);
+			aplayer1.appendChild(lineBreak);
+		}
+	}
+
+	document.getElementById('removePlayer').onclick = function removeInputField() {
+		var x = document.getElementsByTagName('INPUT').length;
+		if (x > 3) {
+			$('#input-player-list input:last').remove();
+			$('#input-player-list br:last').remove();
+			return false;
+		} else {
+		}
+	}
+</script>
