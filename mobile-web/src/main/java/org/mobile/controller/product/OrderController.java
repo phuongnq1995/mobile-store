@@ -75,10 +75,15 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/showCart", method = RequestMethod.GET)
-	public String showCart(HttpSession session, Model model) {
+	public String showCart(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 		Cart cart = checkCart(session);
-		model.addAttribute("order", cart);
-		return "order";
+		if (cart.getListOrderDetails().isEmpty()) {
+			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "Your cart is empty !");
+			return "redirect:/";
+		} else {
+			model.addAttribute("order", cart);
+			return "order";
+		}
 	}
 
 	@Transactional
@@ -115,8 +120,8 @@ public class OrderController {
 
 	@Transactional
 	@RequestMapping(value = "/orderaddress", method = RequestMethod.POST)
-	public String orderCart(RedirectAttributes redirectAttributes, HttpSession session, @Valid User user,
-			BindingResult bindingResult, Model model) throws Exception {
+	public String orderCart(HttpSession session, @Valid User user, BindingResult bindingResult, Model model)
+			throws Exception {
 		Cart cart = (Cart) session.getAttribute("cart");
 		if (cart == null || cart.getListOrderDetails().isEmpty()) {
 			return "redirect:/";

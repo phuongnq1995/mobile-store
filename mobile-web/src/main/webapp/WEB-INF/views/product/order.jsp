@@ -42,12 +42,6 @@
 									type="number" placeholder="1" class="span1"
 									style="max-width: 34px" min="1" />
 								<form:errors path="listOrderDetails[${vs.index}].quantity" />
-								<button class="btn" type="button">
-									<i class="fa fa-minus"></i>
-								</button>
-								<button class="btn" type="button">
-									<i class="fa fa-plus"></i>
-								</button>
 								<a
 									href="${pageContext.request.contextPath}/cart/remove/${vs.index}"
 									class="btn btn-danger" type="button"> <i

@@ -2,6 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <div class="span9">
+	<ul class="breadcrumb">
+		<li class="active">Home</li>
+	</ul>
 	<div class="row-fluid">
 		<br />
 		<c:if test="${SUCCESS_MESSAGE != null}">
@@ -34,8 +37,9 @@
 											<div class="caption">
 												<h5>${product.name}</h5>
 												<h4>
-													<a class="btn" href="product_details.html">VIEW</a> <span
-														class="pull-right">$${product.getCurrentPrice().money}.00</span>
+													<a class="btn"
+														href="${pageContext.request.contextPath}/productdetails/${product.getId()}">VIEW</a>
+													<span class="pull-right">$${product.getCurrentPrice().money}.00</span>
 												</h4>
 											</div>
 										</div>
@@ -54,8 +58,9 @@
 											<div class="caption">
 												<h5>${product.name}</h5>
 												<h4>
-													<a class="btn" href="product_details.html">VIEW</a> <span
-														class="pull-right">$${product.getCurrentPrice().money}</span>
+													<a class="btn"
+														href="${pageContext.request.contextPath}/productdetails/${product.getId()}">VIEW</a>
+													<span class="pull-right">$${product.getCurrentPrice().getMoney()}</span>
 												</h4>
 											</div>
 										</div>
@@ -84,8 +89,10 @@
 						<h5>${product.name}</h5>
 						<p>${product.description}</p>
 						<h4 style="text-align: center">
-							<a class="btn" href="#"><i class="fa fa-search-plus"
-								style="font-size: 20px"></i></a> <a class="btn"
+							<a class="btn"
+								href="${pageContext.request.contextPath}/productdetails/${product.getId()}"><i
+								class="fa fa-search-plus" style="font-size: 20px"></i></a> <a
+								class="btn"
 								href="${pageContext.request.contextPath}/cart/addProductToCart/${product.id}"
 								style="font-size: 15px">Add to <i
 								class="fa fa-shopping-cart" style="font-size: 20px"></i></a> <a

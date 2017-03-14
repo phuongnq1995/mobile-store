@@ -30,7 +30,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/specialoffer")
 	public String specialOffer(Model model){
-		model.addAttribute("searchProducts", productService.findAll());
+		model.addAttribute("products", productService.findAll());
 		return "specialoffer";
 	}
 	
@@ -57,4 +57,11 @@ public class HomeController {
 		model.addAttribute("searchProducts", productService.findByPublisherId(publisher_id));
 		return "welcome";
 	}
+	
+	@RequestMapping(value = "/productdetails/{id}")
+	public String getProductDetails(@PathVariable("id") long id, Model model){
+		model.addAttribute("product", productService.findOne(id));
+		return "productdetails";
+	}
+	
 }

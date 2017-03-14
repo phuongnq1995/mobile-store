@@ -1,6 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <div class="container">
 	<div id="welcomeLine" class="row">
 		<c:choose>
@@ -17,7 +19,7 @@
 		</c:choose>
 		<div class="span6">
 			<div class="pull-right">
-				<span class="btn btn-mini">En</span> 
+				<span class="btn btn-mini">En</span>
 			</div>
 		</div>
 	</div>
@@ -37,8 +39,16 @@
 				<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 			</form>
 			<ul id="topMenu" class="nav pull-right">
-				<li class=""><a href="${pageContext.request.contextPath}/specialoffer">Specials Offer</a></li>
-				<li class=""><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
+				<security:authorize access="hasRole('ROLE_ADMIN')">
+					<li class=""><a
+						href="${pageContext.request.contextPath}/admin/product">Admin
+							Manager</a></li>
+				</security:authorize>
+				<li class=""><a
+					href="${pageContext.request.contextPath}/specialoffer">Specials
+						Offer</a></li>
+				<li class=""><a
+					href="${pageContext.request.contextPath}/contact">Contact</a></li>
 				<li class=""><c:choose>
 						<c:when test="${pageContext.request.userPrincipal.name != null}">
 							<a onclick="document.forms['logoutForm'].submit()" role="button"
