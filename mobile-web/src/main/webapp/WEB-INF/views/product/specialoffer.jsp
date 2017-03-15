@@ -34,8 +34,8 @@
 								src="${pageContext.request.contextPath}/imageShow/${product.getImages().get(0).getId()}"
 								alt="" style="width: 260px; height: 250px;" /></a>
 							<div class="caption">
-								<h5>${product.getName()}</h5>
-								<p>${product.getDescription()}.</p>
+								<div style="height: 30px;"><h5>${product.getName()}</h5></div>
+								<div style="height: 30px;"><p>${product.getDescription()}.</p></div>
 								<h4 style="text-align: center">
 									<a class="btn"
 										href="${pageContext.request.contextPath}/productdetails/${product.getId()}">

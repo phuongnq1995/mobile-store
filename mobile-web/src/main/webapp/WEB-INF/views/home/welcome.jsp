@@ -60,7 +60,7 @@
 												<h4>
 													<a class="btn"
 														href="${pageContext.request.contextPath}/productdetails/${product.getId()}">VIEW</a>
-													<span class="pull-right">$${product.getCurrentPrice().getMoney()}</span>
+													<span class="pull-right">$${product.getCurrentPrice().getMoney()}.00</span>
 												</h4>
 											</div>
 										</div>
@@ -86,8 +86,8 @@
 						src="${pageContext.request.contextPath}/imageShow/${product.getImages().get(0).getId()}"
 						alt="" style="width: 260px; height: 250px;" /></a>
 					<div class="caption">
-						<h5>${product.name}</h5>
-						<p>${product.description}</p>
+						<div style="height: 30px;"><h5>${product.name}</h5></div>
+						<div style="height: 30px;"><p>${product.description}</p></div>
 						<h4 style="text-align: center">
 							<a class="btn"
 								href="${pageContext.request.contextPath}/productdetails/${product.getId()}"><i

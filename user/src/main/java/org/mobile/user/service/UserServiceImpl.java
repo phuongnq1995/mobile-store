@@ -1,6 +1,7 @@
 package org.mobile.user.service;
 
 import java.util.HashSet;
+import java.util.List;
 
 import org.mobile.user.model.Role;
 import org.mobile.user.model.User;
@@ -43,6 +44,10 @@ public class UserServiceImpl implements UserService {
 	public boolean findUserPresent(String email) {
 		System.out.println("KQ:"+userRepository.findUserPresent(email));
 		return userRepository.findUserPresent(email);
+	}
+
+	public List<User> findAllMembers() {
+		return userRepository.findAllMember();
 	}
 
 }

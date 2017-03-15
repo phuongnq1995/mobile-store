@@ -14,13 +14,15 @@
 				<a type="button" class="btn btn-default"
 					href="${pageContext.request.contextPath}/admin/product">Products</a>
 				<a type="button" class="btn btn-default"
+					href="${pageContext.request.contextPath}/admin/members">Members</a>
+				<a type="button" class="btn btn-default"
 					href="${pageContext.request.contextPath}/admin/categories">Categories</a>
 				<a type="button" class="btn btn-default"
 					href="${pageContext.request.contextPath}/admin/publishers">Publishers</a>
 			</div>
 		</div>
 	</div>
-	<br/>
+	<br />
 	<div class="row-fluid">
 		<c:if test="${SUCCESS_MESSAGE != null}">
 			<div class="col-sm-5 alert alert-success">
@@ -51,8 +53,8 @@
 						<td>${category.id}</td>
 						<td>${category.name}</td>
 						<td>${category.description}</td>
-						<td><a href="category/${category.id}"
-							class="btn btn-warning" type="button">Edit</a></td>
+						<td><a href="category/${category.id}" class="btn btn-warning"
+							type="button">Edit</a></td>
 						<td><a role="button" class="btn btn-danger"
 							data-toggle="modal" href="#myModal_${category.id}">Delete</a>
 							<div class="modal fade bs-example-modal-sm"

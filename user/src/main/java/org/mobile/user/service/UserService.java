@@ -1,5 +1,7 @@
 package org.mobile.user.service;
 
+import java.util.List;
+
 import org.mobile.user.model.User;
 
 public interface UserService {
@@ -12,4 +14,5 @@ public interface UserService {
 
 	boolean findUserPresent(String email);
 	
+	List<User> findAllMembers();
 }

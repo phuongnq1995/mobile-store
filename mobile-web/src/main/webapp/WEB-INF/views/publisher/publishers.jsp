@@ -13,15 +13,17 @@
 				<a type="button" class="btn btn-default"
 					href="${pageContext.request.contextPath}/admin/product">Products</a>
 				<a type="button" class="btn btn-default"
+					href="${pageContext.request.contextPath}/admin/members">Members</a>
+				<a type="button" class="btn btn-default"
 					href="${pageContext.request.contextPath}/admin/categories">Categories</a>
 				<a type="button" class="btn btn-default"
 					href="${pageContext.request.contextPath}/admin/publishers">Publishers</a>
 			</div>
 		</div>
 	</div>
-	<br/>
+	<br />
 	<div class="row-fluid">
-	<br/>
+		<br />
 		<c:if test="${SUCCESS_MESSAGE != null}">
 			<div class="col-sm-5 alert alert-success">
 				<strong>${SUCCESS_MESSAGE}</strong>

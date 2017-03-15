@@ -119,4 +119,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/product/productDetails.jsp" />
 	</definition>
+	
+	<definition name="members" extends="base-definition">
+		<put-attribute name="title" value="Members of website" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/members.jsp" />
+	</definition>
 </tiles-definitions>

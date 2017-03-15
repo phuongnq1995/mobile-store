@@ -86,8 +86,9 @@
 		</div>
 		<span class="error text-danger" style="color: red;"><form:errors
 				path="images" /></span>
-		<div id="input-player-list"></div>
-		<input id="a-player1" type='file' name='fileUpload' accept="image/*">
+		<div id="input-player-list">
+			<input type='file' name="fileUpload" accept="image/*">
+		</div>
 		<br>
 		<div class="row-fluid">
 			<div class="col-sm-6">
@@ -107,7 +108,6 @@
 		if (numItems < 5) {
 			var input = document.createElement('input');
 			var lineBreak = document.createElement('br');
-			var testId = "player";
 			var i = 0;
 			var x = document.getElementsByTagName('INPUT').length - 2;
 			for (i = 0; i < x; i++) {
@@ -115,7 +115,7 @@
 			}
 			input.setAttribute('id', testId + i);
 			input.type = 'file';
-			input.name = 'fileUpload[]';
+			input.name = 'fileUpload';
 			input.accept = 'image/*';
 			var aplayer1 = document.getElementById('input-player-list');
 			aplayer1.appendChild(input);

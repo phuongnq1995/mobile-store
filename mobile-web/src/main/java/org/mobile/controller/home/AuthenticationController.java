@@ -52,4 +52,19 @@ public class AuthenticationController {
             model.addAttribute("SUCCESS_MESSAGE", "You have been logged out successfully.");
         return "welcome";
     } 
+    
+	@RequestMapping(value = "/admin/members", method = RequestMethod.GET)
+	public String getMembers(Model model){
+		model.addAttribute("members", userService.findAllMembers());
+		return "members";
+	}
+	
+	/*@RequestMapping(value = "/admin/members/delete/{email}", method = RequestMethod.GET)
+	public String deleteMembers(PathVariable("email") String email, RedirectAttributes redirectAttributes){
+		if (userService.deleteByEmail(email) == "Delete success !")
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", productService.delete(id));
+		else
+			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "Delete fail !");
+		return "redirect:/admin/members";
+	}*/
 }

@@ -17,24 +17,16 @@
 				alt="" style="width: 260px; height: 250px;"> </a>
 			<div id="differentview" class="moreOptopm carousel slide">
 				<div class="carousel-inner">
-					<c:forEach items="${product.getImages()}" var="image">
-						<div class="item active">
+					<div class="item active">
+						<c:forEach items="${product.getImages()}" var="image">
 							<a
 								href="${pageContext.request.contextPath}/imageShow/${image.getId()}">
-								<img style="width: 29%"
+								<img style="width: 43px; height: 60px;"
 								src="${pageContext.request.contextPath}/imageShow/${image.getId()}"
 								alt="" />
 							</a>
-						</div>
-						<div class="item">
-							<a
-								href="${pageContext.request.contextPath}/imageShow/${image.getId()}">
-								<img style="width: 29%"
-								src="${pageContext.request.contextPath}/imageShow/${image.getId()}"
-								alt="" />
-							</a>
-						</div>
-					</c:forEach>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -57,7 +49,7 @@
 			</form>
 
 			<hr class="soft" />
-			<h4>${product.getQuantity()}items in stock</h4>
+			<h4>${product.getQuantity()} items in stock</h4>
 			<form class="form-horizontal qtyFrm pull-right">
 				<div class="control-group">
 					<label class="control-label"><span>Color</span></label>
