@@ -66,5 +66,6 @@ public class AuthenticationController {
 		else
 			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "Delete fail !");
 		return "redirect:/admin/members";
-	}*/
+	}*/ 
+	
 }
