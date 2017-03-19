@@ -46,7 +46,7 @@
 	<br />
 	<div class="thumbnail">
 		<img src="<c:url value="/resources/images/payment_methods.png"/>"
-			title="Bootshop Payment Methods" alt="Payments Methods">
+			title="Bootshop Payment Methods" alt="Payments Methods" class="center-block">
 		<div class="caption">
 			<h5>Payment Methods</h5>
 		</div>

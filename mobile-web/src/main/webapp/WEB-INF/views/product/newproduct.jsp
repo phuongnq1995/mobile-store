@@ -104,7 +104,7 @@
 </div>
 <script>
 	document.getElementById('addPlayer').onclick = function createInputField() {
-		var numItems = $('input[name*="fileUpload"]').length;
+		var numItems = $('input[name="fileUpload"]').length;
 		if (numItems < 5) {
 			var input = document.createElement('input');
 			var lineBreak = document.createElement('br');
@@ -113,7 +113,7 @@
 			for (i = 0; i < x; i++) {
 				i;
 			}
-			input.setAttribute('id', testId + i);
+			input.setAttribute('id', 0 + i);
 			input.type = 'file';
 			input.name = 'fileUpload';
 			input.accept = 'image/*';
