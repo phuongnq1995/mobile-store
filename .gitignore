@@ -6,6 +6,7 @@
 */.externalToolBuilders
 .classpath
 .project
+.css
 */.idea
 */.pmd
 /bin/
