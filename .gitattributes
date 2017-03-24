@@ -1,3 +1,7 @@
 static/* linguist-vendored
 *.rb linguist-language=Java
 linguist-language=Java
+src/main/webapp/lib/* 
+linguist-vendored src/main/webapp/lang/* 
+linguist-vendored src/main/webapp/swagger-ui.js 
+src/main/webapp/swagger-ui.min.js
